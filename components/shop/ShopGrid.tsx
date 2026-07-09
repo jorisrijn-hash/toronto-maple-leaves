@@ -4,12 +4,16 @@ import { useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { categories, products, type Category, type Product } from "@/lib/shop";
 import { ProductCard } from "@/components/shop/ProductCard";
+import { ProductModal } from "@/components/shop/ProductModal";
+import { BagDrawer, type BagItem } from "@/components/shop/BagDrawer";
 import { BagIcon } from "@/components/ui/icons";
 import { revealContainer, VIEWPORT, EASE_OUT } from "@/lib/motion";
 
 export function ShopGrid() {
   const [active, setActive] = useState<Category>("All");
-  const [bag, setBag] = useState(0);
+  const [bag, setBag] = useState<BagItem[]>([]);
+  const [selected, setSelected] = useState<Product | null>(null);
+  const [bagOpen, setBagOpen] = useState(false);
   const [pulse, setPulse] = useState(false);
 
   const list = useMemo(
@@ -17,10 +21,32 @@ export function ShopGrid() {
     [active]
   );
 
-  function addToBag(_p: Product) {
-    setBag((n) => n + 1);
+  const count = bag.reduce((s, i) => s + i.qty, 0);
+
+  function addToBag(product: Product, size: string) {
+    setBag((prev) => {
+      const idx = prev.findIndex((i) => i.product.id === product.id && i.size === size);
+      if (idx >= 0) {
+        const next = [...prev];
+        next[idx] = { ...next[idx], qty: next[idx].qty + 1 };
+        return next;
+      }
+      return [...prev, { product, size, qty: 1 }];
+    });
     setPulse(true);
     window.setTimeout(() => setPulse(false), 250);
+  }
+
+  function changeQty(index: number, delta: number) {
+    setBag((prev) =>
+      prev
+        .map((i, idx) => (idx === index ? { ...i, qty: i.qty + delta } : i))
+        .filter((i) => i.qty > 0)
+    );
+  }
+
+  function removeItem(index: number) {
+    setBag((prev) => prev.filter((_, idx) => idx !== index));
   }
 
   return (
@@ -42,16 +68,17 @@ export function ShopGrid() {
           ))}
         </div>
 
-        <motion.div
+        <motion.button
+          onClick={() => setBagOpen(true)}
           animate={pulse ? { scale: [1, 1.15, 1] } : {}}
           transition={{ duration: 0.25, ease: EASE_OUT }}
-          className="group flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.03] px-4 py-2"
+          className="group flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.03] px-4 py-2 transition-colors hover:border-white/30"
         >
           <BagIcon className="h-4 w-4 text-ice-blue" />
           <span className="font-mono text-sm text-white">
-            {bag} <span className="text-frost/50">in bag</span>
+            {count} <span className="text-frost/50">in bag</span>
           </span>
-        </motion.div>
+        </motion.button>
       </div>
 
       <motion.div
@@ -64,7 +91,7 @@ export function ShopGrid() {
       >
         <AnimatePresence mode="popLayout">
           {list.map((p) => (
-            <ProductCard key={p.id} product={p} onAdd={addToBag} />
+            <ProductCard key={p.id} product={p} onOpen={setSelected} onAdd={addToBag} />
           ))}
         </AnimatePresence>
         <style jsx>{`
@@ -85,6 +112,21 @@ export function ShopGrid() {
           }
         `}</style>
       </motion.div>
+
+      <ProductModal
+        product={selected}
+        onClose={() => setSelected(null)}
+        onAdd={(p, size) => {
+          addToBag(p, size);
+        }}
+      />
+      <BagDrawer
+        open={bagOpen}
+        items={bag}
+        onClose={() => setBagOpen(false)}
+        onQty={changeQty}
+        onRemove={removeItem}
+      />
     </div>
   );
 }

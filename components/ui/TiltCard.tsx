@@ -12,10 +12,12 @@ export function TiltCard({
   children,
   className,
   max = 15,
+  disabled = false,
 }: {
   children: React.ReactNode;
   className?: string;
   max?: number;
+  disabled?: boolean;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const mx = useMotionValue(0.5);
@@ -26,7 +28,7 @@ export function TiltCard({
   const glareX = useTransform(mx, [0, 1], ["0%", "100%"]);
 
   function onMove(e: React.PointerEvent) {
-    if (e.pointerType === "touch") return;
+    if (disabled || e.pointerType === "touch") return;
     const el = ref.current;
     if (!el) return;
     const r = el.getBoundingClientRect();
@@ -43,18 +45,20 @@ export function TiltCard({
       ref={ref}
       onPointerMove={onMove}
       onPointerLeave={onLeave}
-      whileHover={{ scale: 1.02 }}
+      whileHover={disabled ? undefined : { scale: 1.02 }}
       transition={{ type: "spring", stiffness: 300, damping: 24 }}
-      style={{ rotateX: rx, rotateY: ry, transformPerspective: 900 }}
+      style={{ rotateX: disabled ? 0 : rx, rotateY: disabled ? 0 : ry, transformPerspective: 900 }}
       className={clsx("relative [transform-style:preserve-3d]", className)}
     >
       {children}
       {/* moving glare */}
-      <motion.span
-        aria-hidden
-        style={{ left: glareX }}
-        className="pointer-events-none absolute inset-y-0 -ml-24 w-48 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 transition-opacity duration-300 [.group:hover_&]:opacity-100"
-      />
+      {!disabled && (
+        <motion.span
+          aria-hidden
+          style={{ left: glareX }}
+          className="pointer-events-none absolute inset-y-0 -ml-24 w-48 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 transition-opacity duration-300 [.group:hover_&]:opacity-100"
+        />
+      )}
     </motion.div>
   );
 }

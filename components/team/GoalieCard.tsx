@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import type { Goalie } from "@/lib/stats";
 import { TiltCard } from "@/components/ui/TiltCard";
 import { assets } from "@/lib/site";
@@ -33,11 +34,18 @@ export function GoalieCard({ goalie }: { goalie: Goalie }) {
               </span>
             </div>
 
-            <div className="mt-8 flex items-end gap-2">
-              <span className="font-display text-6xl leading-none text-white">
-                {goalie.svPct.toFixed(3).replace(/^0/, "")}
-              </span>
-              <span className="mb-1 font-mono text-xs uppercase tracking-wider text-ice-blue">Sv%</span>
+            <div className="mt-8 flex items-end justify-between gap-3">
+              <div className="flex items-end gap-2">
+                <span className="font-display text-6xl leading-none text-white">
+                  {goalie.svPct.toFixed(3).replace(/^0/, "")}
+                </span>
+                <span className="mb-1 font-mono text-xs uppercase tracking-wider text-ice-blue">Sv%</span>
+              </div>
+              {goalie.photo && (
+                <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-full border border-white/15 bg-gradient-to-b from-white/90 to-frost/70 shadow-lg">
+                  <Image src={goalie.photo} alt={goalie.name} fill sizes="80px" className="object-cover object-top" />
+                </div>
+              )}
             </div>
 
             <h3 className="mt-4 font-display text-2xl leading-[0.95] text-white">{goalie.name}</h3>

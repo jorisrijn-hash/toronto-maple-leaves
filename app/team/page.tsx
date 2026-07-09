@@ -1,4 +1,4 @@
-import { TeamBanner } from "@/components/team/TeamBanner";
+import { TeamHeader } from "@/components/team/TeamHeader";
 import { RosterSection } from "@/components/team/RosterSection";
 import { PlayerCard } from "@/components/team/PlayerCard";
 import { GoalieCard } from "@/components/team/GoalieCard";
@@ -12,7 +12,7 @@ export default function TeamPage() {
 
   return (
     <div className="pb-28">
-      <TeamBanner forwards={forwards.length} defence={defence.length} goalies={goalies.length} />
+      <TeamHeader forwards={forwards.length} defence={defence.length} goalies={goalies.length} />
 
       <RosterSection kicker="Up front" title="Forwards" count={forwards.length}>
         {forwards.map((p) => (

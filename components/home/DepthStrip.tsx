@@ -19,36 +19,35 @@ export function DepthStrip() {
       >
         <Card>
           <span className="font-mono text-xs uppercase tracking-[0.25em] text-ice-blue">
-            Original Six
+            Founded
           </span>
           <span className="mt-4 block font-display text-6xl text-white">1917</span>
           <p className="mt-3 text-sm text-frost/70">
-            Founded as the Toronto Arenas, blue and white ever since.
+            Born as the Toronto Arenas. Blue and white ever since.
           </p>
         </Card>
 
         <Card>
           <span className="font-mono text-xs uppercase tracking-[0.25em] text-ice-blue">
-            Silverware
+            Stanley Cups
           </span>
           <span className="mt-4 block font-display text-6xl text-white">
             <AnimatedCounter value={13} />
           </span>
           <p className="mt-3 text-sm text-frost/70">
-            Stanley Cup championships in franchise history.
+            Championships lifted in franchise history.
           </p>
         </Card>
 
         <Card>
           <span className="font-mono text-xs uppercase tracking-[0.25em] text-ice-blue">
-            2025-26 leader
+            Original Six
           </span>
-          <span className="mt-4 flex items-baseline gap-2 font-display text-6xl text-white">
-            <AnimatedCounter value={79} />
-            <span className="font-mono text-base font-medium text-frost/60">PTS</span>
+          <span className="mt-4 block font-display text-6xl text-white">
+            <AnimatedCounter value={6} />
           </span>
           <p className="mt-3 text-sm text-frost/70">
-            William Nylander led the club in scoring: 30 G, 49 A.
+            One of the NHL&apos;s six founding franchises.
           </p>
         </Card>
       </motion.div>

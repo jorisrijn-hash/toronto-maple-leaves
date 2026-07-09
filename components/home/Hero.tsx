@@ -4,17 +4,9 @@ import Link from "next/link";
 import { useRef } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { WordReveal } from "@/components/ui/WordReveal";
-import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
-import { assets } from "@/lib/site";
-import { leaders, franchise } from "@/lib/stats";
+import { assets, site } from "@/lib/site";
 import { EASE_OUT } from "@/lib/motion";
 import { TicketIcon, ArrowRightIcon } from "@/components/ui/icons";
-
-const heroStats = [
-  { value: franchise.cups, label: "Stanley Cups" },
-  { value: leaders.points.p, label: `${leaders.points.name.split(" ")[1]} · PTS 25-26` },
-  { value: franchise.records[1].value, label: "Matthews · all-time G" },
-];
 
 export function Hero() {
   const px = useMotionValue(0);
@@ -22,7 +14,7 @@ export function Hero() {
   const sx = useSpring(px, { stiffness: 120, damping: 20 });
   const sy = useSpring(py, { stiffness: 120, damping: 20 });
 
-  // Background drifts opposite and further than the foreground → parallax depth.
+  // Background drifts opposite and further than the foreground -> parallax depth.
   const bgX = useTransform(sx, [-0.5, 0.5], [24, -24]);
   const bgY = useTransform(sy, [-0.5, 0.5], [16, -16]);
   const fgX = useTransform(sx, [-0.5, 0.5], [-10, 10]);
@@ -43,10 +35,8 @@ export function Hero() {
       onPointerMove={onMove}
       className="relative flex min-h-[100svh] items-center overflow-hidden"
     >
-      {/* Depth fallback */}
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(120%_100%_at_50%_0%,#0b3a75_0%,#00234c_45%,#05132b_100%)]" />
 
-      {/* Fullscreen hero video — parallax layer (scaled so edges never show on shift) */}
       <motion.video
         style={{ x: bgX, y: bgY, scale: 1.1 }}
         className="absolute inset-0 -z-10 h-full w-full object-cover opacity-70"
@@ -59,39 +49,51 @@ export function Hero() {
         <source src={assets.heroVideo} type="video/mp4" />
       </motion.video>
 
-      <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_top,rgba(5,19,43,0.92)_0%,rgba(5,19,43,0.45)_45%,rgba(5,19,43,0.25)_100%)]" />
+      {/* Cinematic vignette + bottom fade for legible, centred type */}
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(120%_90%_at_50%_50%,transparent_30%,rgba(5,19,43,0.55)_100%)]" />
+      <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_top,rgba(5,19,43,0.95)_0%,rgba(5,19,43,0.4)_50%,rgba(5,19,43,0.2)_100%)]" />
 
-      <motion.div style={{ x: fgX, y: fgY }} className="mx-auto w-full max-w-7xl px-5 pb-20 pt-28 md:px-8">
-        <motion.p
+      <motion.div
+        style={{ x: fgX, y: fgY }}
+        className="mx-auto flex w-full max-w-5xl flex-col items-center px-5 pb-24 pt-28 text-center md:px-8"
+      >
+        {/* Arena location -> Google Maps */}
+        <motion.a
+          href={site.arenaMapsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: EASE_OUT, delay: 0.1 }}
-          className="mb-4 flex items-center gap-3 font-mono text-xs uppercase tracking-[0.3em] text-ice-blue"
+          className="group mb-6 inline-flex items-center gap-2.5 rounded-full border border-white/15 bg-white/[0.04] px-4 py-2 font-mono text-[11px] uppercase tracking-[0.25em] text-frost/80 backdrop-blur-sm transition-colors hover:border-white/35 hover:text-white"
         >
           <span className="inline-block h-2 w-2 rounded-full bg-goal-red animate-pulse-goal" />
-          Scotiabank Arena · Toronto
-        </motion.p>
+          {site.arena} · {site.city.split(",")[0]}
+          <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-ice-blue transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M7 17L17 7M9 7h8v8" />
+          </svg>
+        </motion.a>
 
         <WordReveal
-          text="This is Leafs Nation"
-          className="max-w-4xl font-display text-[13vw] leading-[0.88] text-white sm:text-[9vw] lg:text-[7rem]"
+          text="Our ice. Our city."
+          className="font-display text-[15vw] leading-[0.86] text-white sm:text-[10vw] lg:text-[8.5rem]"
         />
 
         <motion.p
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: EASE_OUT, delay: 0.55 }}
-          className="mt-6 max-w-xl text-balance text-lg text-frost/80"
+          transition={{ duration: 0.6, ease: EASE_OUT, delay: 0.6 }}
+          className="mt-7 max-w-xl text-balance text-lg text-frost/80"
         >
-          Fifty thousand heartbeats, one blue sweater. Follow every shift, every
-          save and every goal, closer than the glass.
+          Home of the Toronto Maple Leafs. Every shift, every save and every goal,
+          closer than the glass.
         </motion.p>
 
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: EASE_OUT, delay: 0.7 }}
-          className="mt-9 flex flex-wrap items-center gap-4"
+          transition={{ duration: 0.6, ease: EASE_OUT, delay: 0.75 }}
+          className="mt-10 flex flex-wrap items-center justify-center gap-4"
         >
           <Link
             href="/tickets"
@@ -108,31 +110,12 @@ export function Hero() {
             <ArrowRightIcon className="h-4 w-4" />
           </Link>
         </motion.div>
-
-        {/* Key stats, on the hero */}
-        <motion.dl
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: EASE_OUT, delay: 0.9 }}
-          className="mt-12 flex flex-wrap gap-x-10 gap-y-6 border-t border-white/10 pt-7"
-        >
-          {heroStats.map((s) => (
-            <div key={s.label} className="min-w-[6rem]">
-              <dd className="font-display text-4xl text-white md:text-5xl">
-                <AnimatedCounter value={s.value} />
-              </dd>
-              <dt className="mt-1 font-mono text-[11px] uppercase tracking-[0.2em] text-frost/60">
-                {s.label}
-              </dt>
-            </div>
-          ))}
-        </motion.dl>
       </motion.div>
 
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.3, duration: 0.6 }}
+        transition={{ delay: 1.2, duration: 0.6 }}
         className="absolute bottom-6 left-1/2 -translate-x-1/2"
       >
         <span className="flex h-9 w-5 items-start justify-center rounded-full border border-white/30 p-1">

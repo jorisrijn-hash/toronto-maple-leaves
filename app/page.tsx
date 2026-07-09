@@ -4,6 +4,7 @@ import { DepthStrip } from "@/components/home/DepthStrip";
 import { FeatureStory } from "@/components/home/FeatureStory";
 import { GameNight } from "@/components/home/GameNight";
 import { CtaBand } from "@/components/home/CtaBand";
+import { Sponsors } from "@/components/layout/Sponsors";
 
 export default function HomePage() {
   return (
@@ -13,6 +14,7 @@ export default function HomePage() {
       <DepthStrip />
       <FeatureStory />
       <GameNight />
+      <Sponsors />
       <CtaBand />
     </>
   );

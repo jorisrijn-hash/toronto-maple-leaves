@@ -6,6 +6,11 @@ export const site = {
   shortName: "Maple Leafs",
   tagline: "Blue and white since 1917.",
   locale: "en",
+  arena: "Scotiabank Arena",
+  city: "Toronto, ON",
+  // Google Maps deep link for the arena.
+  arenaMapsUrl:
+    "https://www.google.com/maps/search/?api=1&query=Scotiabank+Arena+Toronto",
   // NOTE: this is a concept redesign for portfolio purposes.
   disclaimer:
     "Concept redesign. Toronto Maple Leafs, the leaf logo and NHL marks are trademarks of MLSE / the National Hockey League.",
@@ -17,7 +22,6 @@ export const nav: { label: string; href: string }[] = [
   { label: "Schedule", href: "/schedule" },
   { label: "Stats", href: "/stats" },
   { label: "Shop", href: "/shop" },
-  { label: "Tickets", href: "/tickets" },
 ];
 
 // Assets to drop into /public once re-uploaded. Components read from here so a
