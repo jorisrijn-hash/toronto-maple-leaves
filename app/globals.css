@@ -1,0 +1,101 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Families registered via @fontsource imports in app/layout.tsx */
+  --font-display: "Anton";
+  --font-sans: "Archivo Variable";
+  --font-mono: "JetBrains Mono Variable";
+
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+
+  /* Depth background: void at the edges, navy glow toward the top — reads as an arena bowl. */
+  --bg-arena: radial-gradient(
+      120% 90% at 50% -10%,
+      rgba(0, 72, 141, 0.55) 0%,
+      rgba(0, 32, 91, 0.35) 35%,
+      rgba(5, 19, 43, 0) 70%
+    ),
+    #05132b;
+}
+
+@layer base {
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    color-scheme: dark;
+  }
+
+  body {
+    background: var(--bg-arena);
+    background-attachment: fixed;
+    color: #ffffff;
+    font-family: var(--font-sans), system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: rgba(99, 179, 255, 0.35);
+    color: #ffffff;
+  }
+
+  /* Visible keyboard focus — quality floor. */
+  :focus-visible {
+    outline: 2px solid var(--ice-blue, #63b3ff);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  h1, h2, h3, .display {
+    font-family: var(--font-display), Impact, sans-serif;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    line-height: 0.92;
+  }
+}
+
+@layer utilities {
+  /* Subtle etched-ice grooves, echoing the embossed leaf pattern on the real site
+     but static and cheap (no repaint). Sits behind content at low opacity. */
+  .ice-grooves {
+    background-image: repeating-linear-gradient(
+      -45deg,
+      rgba(99, 179, 255, 0.05) 0px,
+      rgba(99, 179, 255, 0.05) 1px,
+      transparent 1px,
+      transparent 22px
+    );
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Focus-blur pop-out: when a group is hovered, siblings marked .depth-recede blur back. */
+  .depth-layer {
+    transition: filter 320ms var(--ease-out), transform 320ms var(--ease-out),
+      opacity 320ms var(--ease-out);
+  }
+}
+
+/* Reduced motion: keep opacity/color, drop movement. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.12s !important;
+  }
+}
