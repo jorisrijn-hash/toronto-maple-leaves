@@ -11,7 +11,7 @@ const SPRING_OPTS = { stiffness: 220, damping: 26, mass: 0.6 } as const;
 export function TiltCard({
   children,
   className,
-  max = 12,
+  max = 15,
 }: {
   children: React.ReactNode;
   className?: string;

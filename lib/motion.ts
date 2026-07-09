@@ -26,14 +26,17 @@ export const revealItem: Variants = {
   },
 };
 
-// Scroll-triggered section lift. Enter with ease-out; nothing appears "from nothing".
+// Scroll-triggered section lift with a real 3D flip-up so depth is obvious without
+// hovering. transformPerspective is per-element, so no parent perspective is needed.
 export const sectionLift: Variants = {
-  hidden: { opacity: 0, y: 28, scale: 0.985 },
+  hidden: { opacity: 0, y: 44, rotateX: -24, scale: 0.96, transformPerspective: 1200 },
   show: {
     opacity: 1,
     y: 0,
+    rotateX: 0,
     scale: 1,
-    transition: { duration: 0.7, ease: EASE_OUT },
+    transformPerspective: 1200,
+    transition: { duration: 0.75, ease: EASE_OUT },
   },
 };
 
