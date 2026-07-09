@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import type { Game } from "@/lib/schedule";
 import { assets } from "@/lib/site";
 import { sectionLift } from "@/lib/motion";
@@ -24,10 +25,10 @@ export function GameCard({ game }: { game: Game }) {
 
         <div className="flex flex-1 items-center justify-center gap-4 px-4">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={assets.leaf} alt="" width={32} height={36} className="h-8 w-auto" />
+          <img src={assets.leaf} alt="" width={36} height={40} className="h-9 w-auto" />
           <span className="font-mono text-xs text-frost/40">vs</span>
-          <span className="grid h-10 w-10 place-items-center rounded-full border border-white/15 bg-rink-navy/60 font-display text-sm text-white">
-            {game.abbr}
+          <span className="relative h-10 w-10 overflow-hidden rounded-lg border border-white/15">
+            <Image src={game.logo} alt={game.opponent} fill sizes="40px" className="object-cover" />
           </span>
         </div>
 

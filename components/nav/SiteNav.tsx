@@ -7,6 +7,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import clsx from "clsx";
 import { nav, site, assets } from "@/lib/site";
 import { EASE_OUT, EASE_DRAWER } from "@/lib/motion";
+import { MenuIcon, TicketIcon } from "@/components/ui/icons";
 
 export function SiteNav() {
   const pathname = usePathname();
@@ -73,8 +74,9 @@ export function SiteNav() {
           <li>
             <Link
               href="/tickets"
-              className="ml-2 inline-flex items-center rounded-full bg-white px-4 py-2 text-sm font-semibold text-ice-void shadow-glow transition-transform duration-150 ease-out hover:scale-[1.03] active:scale-[0.97]"
+              className="group ml-2 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-semibold text-ice-void shadow-glow transition-transform duration-150 ease-out hover:scale-[1.03] active:scale-[0.97]"
             >
+              <TicketIcon className="h-4 w-4" />
               Get Tickets
             </Link>
           </li>
@@ -87,26 +89,7 @@ export function SiteNav() {
           onClick={() => setOpen((v) => !v)}
           className="flex h-10 w-10 items-center justify-center rounded-md text-white md:hidden"
         >
-          <span className="relative block h-4 w-6">
-            <span
-              className={clsx(
-                "absolute left-0 h-0.5 w-6 bg-white transition-all duration-300 ease-out",
-                open ? "top-1.5 rotate-45" : "top-0"
-              )}
-            />
-            <span
-              className={clsx(
-                "absolute left-0 top-1.5 h-0.5 w-6 bg-white transition-opacity duration-200",
-                open ? "opacity-0" : "opacity-100"
-              )}
-            />
-            <span
-              className={clsx(
-                "absolute left-0 h-0.5 w-6 bg-white transition-all duration-300 ease-out",
-                open ? "top-1.5 -rotate-45" : "top-3"
-              )}
-            />
-          </span>
+          <MenuIcon open={open} className="h-6 w-6" />
         </button>
       </nav>
 
@@ -133,8 +116,9 @@ export function SiteNav() {
               <li className="pt-2">
                 <Link
                   href="/tickets"
-                  className="block rounded-full bg-white px-4 py-3 text-center text-sm font-semibold text-ice-void"
+                  className="group flex items-center justify-center gap-2 rounded-full bg-white px-4 py-3 text-center text-sm font-semibold text-ice-void"
                 >
+                  <TicketIcon className="h-4 w-4" />
                   Get Tickets
                 </Link>
               </li>

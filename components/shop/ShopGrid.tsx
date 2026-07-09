@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { categories, products, type Category, type Product } from "@/lib/shop";
 import { ProductCard } from "@/components/shop/ProductCard";
+import { BagIcon } from "@/components/ui/icons";
 import { revealContainer, VIEWPORT, EASE_OUT } from "@/lib/motion";
 
 export function ShopGrid() {
@@ -44,12 +45,9 @@ export function ShopGrid() {
         <motion.div
           animate={pulse ? { scale: [1, 1.15, 1] } : {}}
           transition={{ duration: 0.25, ease: EASE_OUT }}
-          className="flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.03] px-4 py-2"
+          className="group flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.03] px-4 py-2"
         >
-          <svg aria-hidden viewBox="0 0 24 24" className="h-4 w-4 text-ice-blue" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M6 7h12l-1 13H7L6 7z" strokeLinejoin="round" />
-            <path d="M9 7a3 3 0 0 1 6 0" strokeLinecap="round" />
-          </svg>
+          <BagIcon className="h-4 w-4 text-ice-blue" />
           <span className="font-mono text-sm text-white">
             {bag} <span className="text-frost/50">in bag</span>
           </span>

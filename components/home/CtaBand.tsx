@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { assets } from "@/lib/site";
 import { sectionLift, VIEWPORT } from "@/lib/motion";
+import { TicketIcon } from "@/components/ui/icons";
 
 export function CtaBand() {
   return (
@@ -38,8 +39,9 @@ export function CtaBand() {
           </p>
           <Link
             href="/tickets"
-            className="inline-flex items-center rounded-full bg-white px-8 py-4 text-sm font-semibold text-ice-void shadow-glow transition-transform duration-150 ease-out hover:scale-[1.03] active:scale-[0.97]"
+            className="group inline-flex items-center gap-2 rounded-full bg-white px-8 py-4 text-sm font-semibold text-ice-void shadow-glow transition-transform duration-150 ease-out hover:scale-[1.03] active:scale-[0.97]"
           >
+            <TicketIcon className="h-4 w-4" />
             Find your seats
           </Link>
         </div>

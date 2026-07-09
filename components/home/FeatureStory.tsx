@@ -6,6 +6,7 @@ import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { assets } from "@/lib/site";
 import { sectionLift, revealItem, revealContainer, VIEWPORT } from "@/lib/motion";
+import { ArrowRightIcon } from "@/components/ui/icons";
 
 export function FeatureStory() {
   const ref = useRef<HTMLElement>(null);
@@ -69,10 +70,10 @@ export function FeatureStory() {
             <motion.div variants={revealItem} className="mt-7">
               <Link
                 href="/team"
-                className="inline-flex items-center gap-2 rounded-full border border-white/25 px-6 py-3 text-sm font-semibold text-white transition-colors duration-200 hover:border-white/60 hover:bg-white/5"
+                className="group inline-flex items-center gap-2 rounded-full border border-white/25 px-6 py-3 text-sm font-semibold text-white transition-colors duration-200 hover:border-white/60 hover:bg-white/5"
               >
                 Meet the roster
-                <span aria-hidden>→</span>
+                <ArrowRightIcon className="h-4 w-4" />
               </Link>
             </motion.div>
           </motion.div>

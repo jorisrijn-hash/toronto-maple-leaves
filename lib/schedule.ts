@@ -20,6 +20,7 @@ export type Game = {
   abbr: string;
   home: boolean;
   venue: string;
+  logo: string;
 };
 
 export const games: Game[] = [
@@ -33,6 +34,7 @@ export const games: Game[] = [
     abbr: "MTL",
     home: false,
     venue: "Bell Centre",
+    logo: "/logos/mtl.jpg",
   },
   {
     id: "mtl-home",
@@ -44,6 +46,7 @@ export const games: Game[] = [
     abbr: "MTL",
     home: true,
     venue: "Scotiabank Arena",
+    logo: "/logos/mtl.jpg",
   },
   {
     id: "ott-away",
@@ -55,6 +58,7 @@ export const games: Game[] = [
     abbr: "OTT",
     home: false,
     venue: "Canadian Tire Centre",
+    logo: "/logos/ott.jpg",
   },
   {
     id: "ott-home",
@@ -66,5 +70,6 @@ export const games: Game[] = [
     abbr: "OTT",
     home: true,
     venue: "Scotiabank Arena",
+    logo: "/logos/ott.jpg",
   },
 ];

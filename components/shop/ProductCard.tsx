@@ -4,6 +4,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import type { Product } from "@/lib/shop";
 import { TiltCard } from "@/components/ui/TiltCard";
+import { BagIcon } from "@/components/ui/icons";
 import { assets } from "@/lib/site";
 import { sectionLift } from "@/lib/motion";
 
@@ -15,13 +16,15 @@ export function ProductCard({ product, onAdd }: { product: Product; onAdd: (p: P
           {/* image / placeholder */}
           <div className="relative aspect-square overflow-hidden">
             {product.image ? (
-              <Image
-                src={product.image}
-                alt={product.name}
-                fill
-                sizes="(max-width: 768px) 50vw, 300px"
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
-              />
+              <div className="absolute inset-0 bg-gradient-to-b from-white to-[#eef2f7]">
+                <Image
+                  src={product.image}
+                  alt={product.name}
+                  fill
+                  sizes="(max-width: 768px) 50vw, 300px"
+                  className="object-contain p-4 transition-transform duration-500 [.depth-card:hover_&]:scale-105"
+                />
+              </div>
             ) : (
               <div className="absolute inset-0 grid place-items-center bg-[radial-gradient(120%_120%_at_50%_0%,#0b3a75,#00234c_60%,#05132b)]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -50,8 +53,9 @@ export function ProductCard({ product, onAdd }: { product: Product; onAdd: (p: P
             <button
               type="button"
               onClick={() => onAdd(product)}
-              className="cursor-target mt-4 w-full rounded-full bg-white px-4 py-2.5 text-sm font-semibold text-ice-void transition-transform duration-150 ease-out hover:scale-[1.02] active:scale-[0.97]"
+              className="group cursor-target mt-4 flex w-full items-center justify-center gap-2 rounded-full bg-white px-4 py-2.5 text-sm font-semibold text-ice-void transition-transform duration-150 ease-out hover:scale-[1.02] active:scale-[0.97]"
             >
+              <BagIcon className="h-4 w-4" />
               Add to bag
             </button>
           </div>

@@ -8,6 +8,7 @@ import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
 import { assets } from "@/lib/site";
 import { leaders, franchise } from "@/lib/stats";
 import { EASE_OUT } from "@/lib/motion";
+import { TicketIcon, ArrowRightIcon } from "@/components/ui/icons";
 
 const heroStats = [
   { value: franchise.cups, label: "Stanley Cups" },
@@ -94,15 +95,17 @@ export function Hero() {
         >
           <Link
             href="/tickets"
-            className="inline-flex items-center rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-ice-void shadow-glow transition-transform duration-150 ease-out hover:scale-[1.03] active:scale-[0.97]"
+            className="group inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-ice-void shadow-glow transition-transform duration-150 ease-out hover:scale-[1.03] active:scale-[0.97]"
           >
+            <TicketIcon className="h-4 w-4" />
             Get Tickets
           </Link>
           <Link
             href="/team"
-            className="inline-flex items-center rounded-full border border-white/25 px-7 py-3.5 text-sm font-semibold text-white backdrop-blur-sm transition-colors duration-200 hover:border-white/60 hover:bg-white/5"
+            className="group inline-flex items-center gap-2 rounded-full border border-white/25 px-7 py-3.5 text-sm font-semibold text-white backdrop-blur-sm transition-colors duration-200 hover:border-white/60 hover:bg-white/5"
           >
             Explore the Team
+            <ArrowRightIcon className="h-4 w-4" />
           </Link>
         </motion.div>
 
