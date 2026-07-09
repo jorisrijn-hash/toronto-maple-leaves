@@ -1,5 +1,36 @@
-import { ComingSoon } from "@/components/ui/ComingSoon";
+import { TeamBanner } from "@/components/team/TeamBanner";
+import { RosterSection } from "@/components/team/RosterSection";
+import { PlayerCard } from "@/components/team/PlayerCard";
+import { GoalieCard } from "@/components/team/GoalieCard";
+import { skaters, goalies } from "@/lib/stats";
+
 export const metadata = { title: "Team" };
-export default function Page() {
-  return <ComingSoon phase="Shipping in a later phase" title="The Roster" blurb="Every player, line and story, pulling from the 2025-26 club stats you provided." />;
+
+export default function TeamPage() {
+  const forwards = skaters.filter((s) => s.pos !== "D");
+  const defence = skaters.filter((s) => s.pos === "D");
+
+  return (
+    <div className="pb-28">
+      <TeamBanner forwards={forwards.length} defence={defence.length} goalies={goalies.length} />
+
+      <RosterSection kicker="Up front" title="Forwards" count={forwards.length}>
+        {forwards.map((p) => (
+          <PlayerCard key={p.name} player={p} />
+        ))}
+      </RosterSection>
+
+      <RosterSection kicker="On the blue line" title="Defence" count={defence.length}>
+        {defence.map((p) => (
+          <PlayerCard key={p.name} player={p} />
+        ))}
+      </RosterSection>
+
+      <RosterSection kicker="Between the pipes" title="Goaltenders" count={goalies.length}>
+        {goalies.map((g) => (
+          <GoalieCard key={g.name} goalie={g} />
+        ))}
+      </RosterSection>
+    </div>
+  );
 }

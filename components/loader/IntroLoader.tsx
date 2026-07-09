@@ -5,31 +5,37 @@ import { assets } from "@/lib/site";
 
 const SESSION_KEY = "leafs-intro-seen";
 
-// Detailed, once-per-session entrance built around the real crest: a clip-path wipe
-// reveals the logo out of the ice, a light sheen sweeps across it, then a goal-light
-// horn flash and a curtain lift. CSS-driven so it stays smooth during hydration.
+// Once-per-session entrance, in the same visual language as the page transition:
+// the crest lifts in with a glow, a goal-light streak sweeps across, the wordmark
+// rises, then the whole panel wipes up to reveal the page.
+//
+// Covering styles are INLINE so the overlay hides the page from the very first paint
+// (no flash of content before styled-jsx loads). Scroll is unlocked when the intro
+// finishes — not only on unmount — because the component returns null but stays mounted.
 export function IntroLoader() {
   const [phase, setPhase] = useState<"play" | "done">("play");
 
   useEffect(() => {
-    const reduce =
-      typeof window !== "undefined" &&
-      window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    const reduce = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
 
     let seen = false;
     try {
       seen = sessionStorage.getItem(SESSION_KEY) === "1";
     } catch {
-      /* storage blocked — just play it */
+      /* storage blocked */
     }
     if (seen) {
       setPhase("done");
-      return;
+      return; // never locked scroll, nothing to restore
     }
 
-    document.body.style.overflow = "hidden";
-    const duration = reduce ? 700 : 2500;
+    const html = document.documentElement;
+    const prev = html.style.overflow;
+    html.style.overflow = "hidden";
+
+    const duration = reduce ? 650 : 2500;
     const t = window.setTimeout(() => {
+      html.style.overflow = prev; // unlock here — cleanup alone won't run
       try {
         sessionStorage.setItem(SESSION_KEY, "1");
       } catch {
@@ -40,32 +46,51 @@ export function IntroLoader() {
 
     return () => {
       window.clearTimeout(t);
-      document.body.style.overflow = "";
+      html.style.overflow = prev;
     };
   }, []);
 
   if (phase === "done") return null;
 
   return (
-    <div className="intro" aria-hidden="true">
+    <div
+      aria-hidden="true"
+      className="intro"
+      // Inline cover: guaranteed on first paint, before any CSS-in-JS loads.
+      style={{
+        position: "fixed",
+        inset: 0,
+        zIndex: 100,
+        background: "linear-gradient(180deg,#00205b 0%,#05132b 60%)",
+        display: "grid",
+        placeItems: "center",
+        overflow: "hidden",
+      }}
+    >
+      <div className="intro__grooves ice-grooves" />
       <div className="intro__glow" />
-      <div className="intro__crest">
+
+      <div className="intro__stack">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={assets.logoWhite} alt="" className="intro__logo" width={220} height={246} />
-        <span className="intro__sheen" />
+        <img src={assets.leaf} alt="" width={132} height={148} className="intro__leaf" />
+        <div className="intro__word">
+          <span>Toronto</span>
+          <span>Maple</span>
+          <span>Leafs</span>
+        </div>
       </div>
-      <div className="intro__horn" />
-      <div className="intro__curtain" />
+
+      <div className="intro__streak" />
 
       <style jsx>{`
         .intro {
-          position: fixed;
+          /* wipe the whole panel up at the end to reveal the page */
+          animation: panel-up 0.7s var(--ease-drawer) 1.85s forwards;
+        }
+        .intro__grooves {
+          position: absolute;
           inset: 0;
-          z-index: 100;
-          background: #05132b;
-          display: grid;
-          place-items: center;
-          overflow: hidden;
+          opacity: 0.4;
         }
         .intro__glow {
           position: absolute;
@@ -75,96 +100,94 @@ export function IntroLoader() {
           background: radial-gradient(
             circle,
             rgba(99, 179, 255, 0.45) 0%,
-            rgba(0, 72, 141, 0.25) 35%,
+            rgba(0, 72, 141, 0.22) 38%,
             transparent 70%
           );
           filter: blur(12px);
-          transform: scale(0.4);
           opacity: 0;
-          animation: glow-bloom 2.2s var(--ease-out) forwards;
+          transform: scale(0.5);
+          animation: glow-bloom 2s var(--ease-out) forwards;
         }
-        .intro__crest {
+        .intro__stack {
           position: relative;
-          width: clamp(160px, 26vw, 240px);
-          aspect-ratio: 290 / 325;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 1.5rem;
         }
-        .intro__logo {
-          width: 100%;
-          height: 100%;
-          /* Reveal out of the ice: wipe up + settle from a slight scale/blur. */
-          clip-path: inset(100% 0 0 0);
-          transform: scale(0.94);
-          filter: blur(6px) drop-shadow(0 10px 40px rgba(99, 179, 255, 0.35));
-          animation: crest-reveal 1s var(--ease-in-out) 0.25s forwards;
-        }
-        .intro__sheen {
-          position: absolute;
-          inset: 0;
-          pointer-events: none;
-          background: linear-gradient(
-            105deg,
-            transparent 40%,
-            rgba(255, 255, 255, 0.55) 50%,
-            transparent 60%
-          );
-          transform: translateX(-130%) skewX(-12deg);
+        .intro__leaf {
+          height: clamp(84px, 14vw, 132px);
+          width: auto;
           opacity: 0;
-          animation: sheen 0.9s var(--ease-out) 1.15s;
+          transform: scale(0.8) translateY(8px);
+          filter: drop-shadow(0 0 28px rgba(99, 179, 255, 0.5));
+          animation: leaf-in 0.7s var(--ease-out) 0.25s forwards;
         }
-        .intro__horn {
+        .intro__word {
+          display: flex;
+          gap: 0.5ch;
+          font-family: var(--font-display), Impact, sans-serif;
+          text-transform: uppercase;
+          font-size: clamp(1.5rem, 5vw, 3rem);
+          letter-spacing: 0.02em;
+          color: #fff;
+        }
+        .intro__word span {
+          opacity: 0;
+          transform: translateY(16px);
+          filter: blur(6px);
+          animation: word-in 0.55s var(--ease-out) forwards;
+        }
+        .intro__word span:nth-child(1) { animation-delay: 0.85s; }
+        .intro__word span:nth-child(2) { animation-delay: 0.95s; }
+        .intro__word span:nth-child(3) { animation-delay: 1.05s; }
+        .intro__streak {
           position: absolute;
-          inset: 0;
-          pointer-events: none;
+          inset-inline: 0;
+          top: 50%;
+          height: 3px;
+          transform: translateY(-50%) scaleX(0);
+          transform-origin: left;
           background: linear-gradient(
-            100deg,
-            transparent 46%,
-            rgba(232, 17, 45, 0.35) 50%,
-            rgba(255, 255, 255, 0.85) 52%,
-            transparent 58%
+            90deg,
+            transparent,
+            rgba(232, 17, 45, 0.7),
+            #ffffff,
+            rgba(99, 179, 255, 0.7),
+            transparent
           );
-          transform: translateX(-120%);
-          animation: horn 0.65s var(--ease-out) 1.55s;
-        }
-        .intro__curtain {
-          position: absolute;
-          inset: 0;
-          background: #05132b;
-          transform: translateY(0);
-          animation: curtain 0.7s var(--ease-drawer) 1.85s forwards;
+          opacity: 0;
+          animation: streak 0.7s var(--ease-out) 1.2s;
         }
 
         @keyframes glow-bloom {
-          0% { opacity: 0; transform: scale(0.4); }
+          0% { opacity: 0; transform: scale(0.5); }
           45% { opacity: 1; transform: scale(1); }
-          100% { opacity: 0.35; transform: scale(1.15); }
+          100% { opacity: 0.4; transform: scale(1.12); }
         }
-        @keyframes crest-reveal {
-          to { clip-path: inset(0 0 0 0); transform: scale(1); filter: blur(0) drop-shadow(0 10px 40px rgba(99, 179, 255, 0.35)); }
+        @keyframes leaf-in {
+          to { opacity: 1; transform: scale(1) translateY(0); }
         }
-        @keyframes sheen {
-          0% { opacity: 0; transform: translateX(-130%) skewX(-12deg); }
-          20% { opacity: 1; }
-          100% { opacity: 0; transform: translateX(230%) skewX(-12deg); }
+        @keyframes word-in {
+          to { opacity: 1; transform: translateY(0); filter: blur(0); }
         }
-        @keyframes horn {
-          to { transform: translateX(120%); }
+        @keyframes streak {
+          0% { opacity: 0; transform: translateY(-50%) scaleX(0); }
+          40% { opacity: 1; }
+          100% { opacity: 0; transform: translateY(-50%) scaleX(1); }
         }
-        @keyframes curtain {
+        @keyframes panel-up {
           to { transform: translateY(-100%); }
         }
 
         @media (prefers-reduced-motion: reduce) {
+          .intro { animation: panel-fade 0.4s ease 0.4s forwards; }
           .intro__glow { animation: none; opacity: 0.3; transform: scale(1); }
-          .intro__sheen,
-          .intro__horn,
-          .intro__curtain { animation: none; opacity: 0; }
-          .intro__logo {
-            animation: fade-only 0.4s ease forwards;
-            clip-path: inset(0 0 0 0);
-            transform: none;
-            filter: none;
-          }
-          @keyframes fade-only { from { opacity: 0.4; } to { opacity: 1; } }
+          .intro__streak { display: none; }
+          .intro__leaf { animation: fade-only 0.3s ease forwards; transform: none; }
+          .intro__word span { animation: fade-only 0.3s ease forwards; transform: none; filter: none; }
+          @keyframes fade-only { from { opacity: 0; } to { opacity: 1; } }
+          @keyframes panel-fade { to { opacity: 0; visibility: hidden; } }
         }
       `}</style>
     </div>
