@@ -49,13 +49,13 @@ export function TicketsBoard() {
         initial="hidden"
         whileInView="show"
         viewport={VIEWPORT}
-        className="depth-group mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4"
+        className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4"
       >
         {seating.map((t) => (
           <motion.div
             key={t.name}
             variants={sectionLift}
-            className="depth-card depth-layer rounded-2xl border border-white/10 bg-white/[0.03] p-5"
+            className="rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition-colors duration-200 hover:border-white/25 hover:bg-white/[0.05]"
           >
             <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-ice-blue">{t.name}</p>
             <p className="mt-3 font-display text-3xl text-white">{t.from}</p>
@@ -76,13 +76,13 @@ export function TicketsBoard() {
           initial="hidden"
           whileInView="show"
           viewport={VIEWPORT}
-          className="depth-group grid gap-5 md:grid-cols-2"
+          className="grid gap-5 md:grid-cols-2"
         >
           {rest.map((p) => (
             <motion.article
               key={p.id}
               variants={sectionLift}
-              className="depth-card depth-layer group flex flex-col rounded-2xl border border-white/10 bg-white/[0.03] p-7 shadow-pop"
+              className="group flex flex-col rounded-2xl border border-white/10 bg-white/[0.03] p-7 shadow-pop transition-all duration-200 hover:-translate-y-1 hover:border-white/25"
             >
               <div className="flex items-center justify-between">
                 <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-ice-blue">
@@ -103,23 +103,6 @@ export function TicketsBoard() {
         </motion.div>
       </div>
 
-      <style jsx>{`
-        :global(.depth-group):hover :global(.depth-card) {
-          opacity: 0.55;
-          filter: blur(2px);
-        }
-        :global(.depth-group) :global(.depth-card:hover) {
-          opacity: 1;
-          filter: blur(0);
-          z-index: 10;
-        }
-        @media (hover: none) {
-          :global(.depth-group):hover :global(.depth-card) {
-            opacity: 1;
-            filter: none;
-          }
-        }
-      `}</style>
     </div>
   );
 }

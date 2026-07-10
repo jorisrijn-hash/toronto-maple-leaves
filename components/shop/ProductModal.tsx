@@ -68,9 +68,9 @@ export function ProductModal({
             className="relative grid max-h-[90vh] w-full max-w-4xl overflow-hidden rounded-3xl border border-white/12 bg-ice-void shadow-2xl md:grid-cols-2"
           >
             {/* image */}
-            <div className="group relative aspect-square bg-gradient-to-b from-white to-[#e9eef5] md:aspect-auto">
+            <div className="group relative aspect-square bg-[radial-gradient(circle_at_50%_40%,rgba(120,165,225,0.18),rgba(5,19,43,0.5))] md:aspect-auto">
               {product.image ? (
-                <Image src={product.image} alt={product.name} fill sizes="(max-width:768px) 100vw, 500px" className="object-contain p-8" />
+                <Image src={product.image} alt={product.name} fill sizes="(max-width:768px) 100vw, 500px" className="object-contain p-8 drop-shadow-[0_16px_32px_rgba(0,0,0,0.45)]" />
               ) : (
                 <div className="grid h-full place-items-center">
                   {/* eslint-disable-next-line @next/next/no-img-element */}

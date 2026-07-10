@@ -40,13 +40,13 @@ export function ProductCard({
         <article className="relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] shadow-pop [transform-style:preserve-3d]">
           <div className="relative aspect-square overflow-hidden">
             {product.image ? (
-              <div className="absolute inset-0 bg-gradient-to-b from-white to-[#eef2f7]">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_38%,rgba(120,165,225,0.16),transparent_62%)]">
                 <Image
                   src={product.image}
                   alt={product.name}
                   fill
                   sizes="(max-width: 768px) 50vw, 300px"
-                  className="object-contain p-4 transition-transform duration-500 [.depth-card:hover_&]:scale-105"
+                  className="object-contain p-5 drop-shadow-[0_12px_24px_rgba(0,0,0,0.35)] transition-transform duration-500 [.depth-card:hover_&]:scale-105"
                 />
               </div>
             ) : (

@@ -10,9 +10,9 @@ export type Sponsor = {
 };
 
 export const sponsors: Sponsor[] = [
-  { name: "Scotiabank", role: "Arena naming rights", url: "https://www.scotiabank.com", tier: "premier" },
-  { name: "Dairy Farmers of Ontario", role: "Jersey patch · Milk", url: "https://www.nhl.com/mapleleafs/news/toronto-maple-leafs-partner-with-dairy-farmers-of-ontario-335651244", tier: "premier" },
-  { name: "Oreo", role: "Helmet sponsor", url: "https://www.oreo.com", tier: "premier" },
+  { name: "Scotiabank", role: "Arena naming rights", url: "https://www.scotiabank.com", logo: "/sponsors/scotiabank.png", tier: "premier" },
+  { name: "Dairy Farmers of Ontario", role: "Jersey patch · Milk", url: "https://www.nhl.com/mapleleafs/news/toronto-maple-leafs-partner-with-dairy-farmers-of-ontario-335651244", logo: "/sponsors/milk.png", tier: "premier" },
+  { name: "Oreo", role: "Helmet sponsor", url: "https://www.oreo.com", logo: "/sponsors/oreo.png", tier: "premier" },
   { name: "Gatorade Canada", role: "Official partner", url: "https://gatorade.ca/pages/team", tier: "official" },
   { name: "Mastercard", role: "Financial", url: "https://www.mastercard.ca", tier: "official" },
   { name: "Navacord", role: "Insurance", url: "https://navacord.com", tier: "official" },

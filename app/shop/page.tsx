@@ -1,5 +1,6 @@
 import { WordReveal } from "@/components/ui/WordReveal";
 import { ShopGrid } from "@/components/shop/ShopGrid";
+import { McKennaBanner } from "@/components/shop/McKennaBanner";
 
 export const metadata = { title: "Shop" };
 
@@ -20,6 +21,10 @@ export default function ShopPage() {
           nights and the loudest ones.
         </p>
       </header>
+
+      <section className="mx-auto mt-12 max-w-7xl px-5 md:px-8">
+        <McKennaBanner />
+      </section>
 
       <section className="mx-auto mt-14 max-w-7xl px-5 md:px-8">
         <ShopGrid />

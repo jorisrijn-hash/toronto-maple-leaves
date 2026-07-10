@@ -39,7 +39,7 @@ export function PlayerCard({ player }: { player: Skater }) {
       <TiltCard max={open ? 0 : 11} disabled={open}>
         <article
           data-open={open}
-          className="relative h-full overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-white/[0.05] to-white/[0.01] p-6 shadow-pop transition-transform duration-300 ease-out [transform-style:preserve-3d] data-[open=true]:scale-[1.07] data-[open=true]:shadow-[0_40px_80px_-24px_rgba(0,12,40,0.9)]"
+          className="relative h-full overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-white/[0.05] to-white/[0.01] p-6 shadow-pop transition-[transform,box-shadow] duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transform-style:preserve-3d] data-[open=true]:scale-[1.06] data-[open=true]:shadow-[0_40px_80px_-24px_rgba(0,12,40,0.9)]"
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
@@ -93,10 +93,10 @@ export function PlayerCard({ player }: { player: Skater }) {
           <AnimatePresence>
             {open && (
               <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.25, ease: EASE_OUT }}
+                initial={{ opacity: 0, scale: 0.96, y: 8 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.97, y: 6 }}
+                transition={{ duration: 0.4, ease: EASE_OUT }}
                 className="absolute inset-0 flex flex-col justify-between bg-[linear-gradient(180deg,rgba(0,32,91,0.92),rgba(5,19,43,0.97))] p-6 backdrop-blur-sm"
                 style={{ transform: "translateZ(40px)" }}
               >

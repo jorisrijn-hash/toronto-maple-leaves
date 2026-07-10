@@ -71,7 +71,7 @@ export function BagDrawer({
                 <ul className="space-y-4">
                   {items.map((item, i) => (
                     <li key={`${item.product.id}-${item.size}`} className="flex gap-4 rounded-xl border border-white/8 bg-white/[0.02] p-3">
-                      <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-lg bg-gradient-to-b from-white to-[#e9eef5]">
+                      <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-lg bg-white/[0.05] ring-1 ring-white/10">
                         {item.product.image && (
                           <Image src={item.product.image} alt={item.product.name} fill sizes="80px" className="object-contain p-1.5" />
                         )}
