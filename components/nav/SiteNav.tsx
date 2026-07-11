@@ -29,10 +29,31 @@ function NavLink({ href, label, active }: { href: string; label: string; active:
   );
 }
 
+function SearchIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="11" cy="11" r="7" />
+      <path d="M21 21l-4.3-4.3" />
+    </svg>
+  );
+}
+
+function openPalette() {
+  window.dispatchEvent(new Event("leafs:command"));
+}
+
 export function SiteNav() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  // Starts on the Mac glyph and is corrected after mount, so the server render and
+  // the first client render agree and hydration stays clean.
+  const [modKey, setModKey] = useState("\u2318");
+
+  useEffect(() => {
+    const isMac = /mac|iphone|ipad|ipod/i.test(navigator.userAgent);
+    if (!isMac) setModKey("Ctrl ");
+  }, []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -42,10 +63,6 @@ export function SiteNav() {
   }, []);
 
   useEffect(() => setOpen(false), [pathname]);
-
-  const half = Math.ceil(nav.length / 2);
-  const leftNav = nav.slice(0, half);
-  const rightNav = nav.slice(half);
 
   return (
     <header
@@ -57,20 +74,11 @@ export function SiteNav() {
       )}
     >
       <nav className="relative mx-auto grid h-16 max-w-7xl grid-cols-[1fr_auto_1fr] items-center px-5 md:px-8">
-        {/* left links */}
-        <ul className="hidden items-center justify-end gap-1 md:flex">
-          {leftNav.map((item) => (
-            <li key={item.href}>
-              <NavLink href={item.href} label={item.label} active={pathname === item.href} />
-            </li>
-          ))}
-        </ul>
-
-        {/* center logo / home */}
+        {/* logo, left */}
         <Link
           href="/"
           aria-label={`${site.shortName} home`}
-          className="group col-start-1 flex items-center justify-self-start md:col-start-2 md:justify-self-center"
+          className="group flex shrink-0 items-center justify-self-start"
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
@@ -80,35 +88,60 @@ export function SiteNav() {
             height={40}
             className="h-9 w-auto transition-transform duration-300 ease-out group-hover:rotate-[8deg]"
           />
-          <span className="ml-3 font-display text-lg leading-none tracking-wide text-white md:hidden">
+          <span className="ml-3 font-display text-lg leading-none tracking-wide text-white lg:hidden">
             {site.shortName}
           </span>
         </Link>
 
-        {/* right links + CTA */}
-        <div className="hidden items-center gap-1 md:flex">
-          {rightNav.map((item) => (
-            <NavLink key={item.href} href={item.href} label={item.label} active={pathname === item.href} />
+        {/*
+          The links are the middle column. Two equal 1fr side columns means this column
+          is genuinely centred, and unlike absolute positioning the columns cannot
+          overlap when space runs short. The old nav split the links either side of a
+          centred logo, which only looks centred when both halves happen to be the same
+          width. With seven items of differing lengths, they never were.
+        */}
+        <ul className="col-start-2 hidden items-center justify-center gap-0.5 lg:flex">
+          {nav.map((item) => (
+            <li key={item.href}>
+              <NavLink href={item.href} label={item.label} active={pathname === item.href} />
+            </li>
           ))}
+        </ul>
+
+        {/* actions, right */}
+        <div className="col-start-3 flex shrink-0 items-center justify-end gap-2 justify-self-end">
+          <button
+            type="button"
+            onClick={openPalette}
+            aria-label="Search the site"
+            className="group hidden items-center gap-2 rounded-full border border-white/12 bg-white/[0.03] py-2 pl-3 pr-2 text-sm text-frost/60 outline-none transition-colors hover:border-white/30 hover:text-white focus-visible:ring-2 focus-visible:ring-ice-blue md:flex"
+          >
+            <SearchIcon className="h-4 w-4" />
+            <span className="hidden xl:inline">Search</span>
+            <kbd className="rounded border border-white/15 bg-white/[0.04] px-1.5 py-0.5 font-mono text-[10px] text-frost/55 transition-colors group-hover:text-frost/80">
+              {modKey}K
+            </kbd>
+          </button>
+
           <Link
             href="/tickets"
-            className="group ml-auto inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-semibold text-ice-void shadow-glow transition-transform duration-150 ease-out hover:scale-[1.03] active:scale-[0.97]"
+            className="group inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-semibold text-ice-void shadow-glow transition-transform duration-150 ease-out hover:scale-[1.03] active:scale-[0.97]"
           >
             <TicketIcon className="h-4 w-4" />
-            Get Tickets
+            <span className="hidden sm:inline">Get Tickets</span>
+            <span className="sm:hidden">Tickets</span>
           </Link>
-        </div>
 
-        {/* mobile toggle */}
-        <button
-          type="button"
-          aria-label="Open menu"
-          aria-expanded={open}
-          onClick={() => setOpen((v) => !v)}
-          className="col-start-3 flex h-10 w-10 items-center justify-center justify-self-end rounded-md text-white md:hidden"
-        >
-          <MenuIcon open={open} className="h-6 w-6" />
-        </button>
+          <button
+            type="button"
+            aria-label="Open menu"
+            aria-expanded={open}
+            onClick={() => setOpen((v) => !v)}
+            className="flex h-10 w-10 items-center justify-center rounded-md text-white lg:hidden"
+          >
+            <MenuIcon open={open} className="h-6 w-6" />
+          </button>
+        </div>
       </nav>
 
       <AnimatePresence>
@@ -118,9 +151,22 @@ export function SiteNav() {
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0, transition: { duration: 0.25, ease: EASE_DRAWER } }}
             exit={{ opacity: 0, y: -8, transition: { duration: 0.15, ease: EASE_OUT } }}
-            className="border-t border-white/10 bg-ice-void/95 backdrop-blur-md md:hidden"
+            className="border-t border-white/10 bg-ice-void/95 backdrop-blur-md lg:hidden"
           >
             <ul className="flex flex-col px-5 py-3">
+              <li>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setOpen(false);
+                    openPalette();
+                  }}
+                  className="mb-1 flex w-full items-center gap-3 rounded-md px-2 py-3 text-base font-medium text-frost/80 transition-colors hover:text-white"
+                >
+                  <SearchIcon className="h-4 w-4" />
+                  Search players, pages, products
+                </button>
+              </li>
               {nav.map((item) => (
                 <li key={item.href}>
                   <Link
@@ -131,15 +177,6 @@ export function SiteNav() {
                   </Link>
                 </li>
               ))}
-              <li className="pt-2">
-                <Link
-                  href="/tickets"
-                  className="group flex items-center justify-center gap-2 rounded-full bg-white px-4 py-3 text-center text-sm font-semibold text-ice-void"
-                >
-                  <TicketIcon className="h-4 w-4" />
-                  Get Tickets
-                </Link>
-              </li>
             </ul>
           </motion.div>
         )}

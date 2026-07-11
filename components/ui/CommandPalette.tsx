@@ -169,9 +169,32 @@ export function CommandPalette() {
                 ))
               )}
             </div>
+
+            {/* Keyboard legend: once the palette is open it teaches its own controls. */}
+            <div className="flex items-center gap-4 border-t border-white/10 px-4 py-2.5">
+              <Hint keys={["\u2191", "\u2193"]} label="Navigate" />
+              <Hint keys={["\u21B5"]} label="Open" />
+              <Hint keys={["esc"]} label="Close" />
+            </div>
           </motion.div>
         </motion.div>
       )}
     </AnimatePresence>
+  );
+}
+
+function Hint({ keys, label }: { keys: string[]; label: string }) {
+  return (
+    <span className="flex items-center gap-1.5">
+      {keys.map((k) => (
+        <kbd
+          key={k}
+          className="grid h-5 min-w-[1.25rem] place-items-center rounded border border-white/15 bg-white/[0.04] px-1 font-mono text-[10px] text-frost/70"
+        >
+          {k}
+        </kbd>
+      ))}
+      <span className="font-mono text-[10px] text-frost/55">{label}</span>
+    </span>
   );
 }
