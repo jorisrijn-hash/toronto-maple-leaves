@@ -33,6 +33,8 @@ const columns: { title: string; links: { label: string; href: string; external?:
     links: [
       { label: "History", href: "/history" },
       { label: "Gallery", href: "/gallery" },
+      { label: "Partner with us", href: "/partners" },
+      { label: "Contact", href: "/contact" },
       { label: "News", href: "/news" },
       { label: "Match centre", href: "/match/demo-final" },
     ],

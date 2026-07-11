@@ -8,9 +8,14 @@ export default function StandingsPage() {
   return (
     <div className="pb-28 pt-28">
       <header className="mx-auto max-w-7xl px-5 md:px-8">
-        <p className="mb-4 font-mono text-xs uppercase tracking-[0.3em] text-ice-blue">
-          {standingsMeta.season} · {standingsMeta.division}
-        </p>
+        <div className="mb-4 flex flex-wrap items-center gap-3">
+          <p className="font-mono text-xs uppercase tracking-[0.3em] text-ice-blue">
+            {standingsMeta.season} · {standingsMeta.division}
+          </p>
+          <span className="rounded-full border border-goal-red/40 bg-goal-red/10 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.2em] text-goal-red-ink">
+            Illustrative data
+          </span>
+        </div>
         <WordReveal
           text="Standings"
           className="font-display text-[15vw] leading-[0.9] text-white sm:text-7xl lg:text-8xl"

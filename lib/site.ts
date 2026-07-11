@@ -22,6 +22,7 @@ export const nav: { label: string; href: string }[] = [
   { label: "Standings", href: "/standings" },
   { label: "Stats", href: "/stats" },
   { label: "News", href: "/news" },
+  { label: "Youth", href: "/youth" },
   { label: "Shop", href: "/shop" },
 ];
 

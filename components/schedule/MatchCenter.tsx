@@ -33,6 +33,11 @@ export function MatchCenter({ match }: { match: MatchDetail }) {
           <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-ice-blue">
             {g.home ? "Home" : "Away"} · {g.weekday} {g.month} {g.day} · {g.venue}
           </span>
+          {match.final && (
+            <span className="mt-3 rounded-full border border-goal-red/40 bg-goal-red/10 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.2em] text-goal-red-ink">
+              Illustrative result
+            </span>
+          )}
 
           <div className="mt-6 flex w-full max-w-md items-center justify-between">
             <Team name="Toronto" logo={assets.leaf} isLeaf />

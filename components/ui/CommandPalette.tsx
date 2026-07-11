@@ -21,6 +21,9 @@ const pages: Item[] = [
   { label: "Tickets", sub: "Get in the building", href: "/tickets", group: "Pages" },
   { label: "History", sub: "Since 1917", href: "/history", group: "Pages" },
   { label: "Gallery", sub: "Photos", href: "/gallery", group: "Pages" },
+  { label: "Hockey Development", sub: "Camps and clinics", href: "/youth", group: "Pages" },
+  { label: "Partner with us", sub: "Sponsorship", href: "/partners", group: "Pages" },
+  { label: "Contact", sub: "Get in touch", href: "/contact", group: "Pages" },
 ];
 
 const index: Item[] = [
