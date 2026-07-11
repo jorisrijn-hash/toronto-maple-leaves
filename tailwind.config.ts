@@ -16,7 +16,21 @@ const config: Config = {
         "leafs-blue": "#00488D",
         "ice-blue": "#63B3FF",
         frost: "#E8F1FF",
-        "goal-red": "#E8112D",
+        "goal-red": "#E8112D", // fills only: 4.01:1 on ice-void, too low for text
+        // Text-safe red. #E8112D as a foreground fails WCAG AA on ice-void; this
+        // lighter tint hits 5.72:1 while still reading as goal red.
+        "goal-red-ink": "#FF4D63",
+      },
+      // Semantic stacking order. Replaces the ad-hoc z-[61] / z-[85] / z-[100]
+      // magic numbers that were scattered across components.
+      zIndex: {
+        nav: "50",
+        announce: "60",
+        cursor: "65",
+        consent: "70",
+        drawer: "85",
+        lightbox: "95",
+        palette: "100",
       },
       fontFamily: {
         display: ["var(--font-display)", "Impact", "sans-serif"],
