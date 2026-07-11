@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 import type { Game } from "@/lib/schedule";
 import { assets } from "@/lib/site";
 import { sectionLift } from "@/lib/motion";
@@ -10,8 +11,9 @@ export function GameCard({ game }: { game: Game }) {
   return (
     <motion.article
       variants={sectionLift}
-      className="depth-card depth-layer group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] p-6 shadow-pop"
+      className="depth-card depth-layer group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] p-6 shadow-pop transition-colors hover:border-white/25"
     >
+      <Link href={`/match/${game.id}`} className="absolute inset-0 z-10" aria-label={`Match centre: Leafs vs ${game.opponent}`} />
       <div className="flex items-center justify-between">
         <div className="text-center">
           <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-ice-blue">
@@ -48,7 +50,10 @@ export function GameCard({ game }: { game: Game }) {
           <div className="text-sm font-medium text-white">{game.opponent}</div>
           <div className="mt-0.5 font-mono text-[11px] text-frost/45">{game.venue}</div>
         </div>
-        <span className="font-mono text-[11px] text-frost/35">TBD</span>
+        <span className="inline-flex items-center gap-1 font-mono text-[11px] text-frost/35 transition-colors group-hover:text-ice-blue">
+          Match centre
+          <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+        </span>
       </div>
     </motion.article>
   );

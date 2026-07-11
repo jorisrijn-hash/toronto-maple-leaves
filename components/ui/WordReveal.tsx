@@ -21,7 +21,7 @@ export function WordReveal({
 
   return (
     <Tag
-      className={clsx("flex flex-wrap", className)}
+      className={clsx("flex flex-wrap content-start gap-y-[0.12em]", className)}
       variants={revealContainer}
       initial="hidden"
       animate="show"

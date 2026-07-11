@@ -2,6 +2,9 @@ import { WordReveal } from "@/components/ui/WordReveal";
 import { Countdown } from "@/components/schedule/Countdown";
 import { ScheduleGames } from "@/components/schedule/ScheduleGames";
 import { scheduleMeta } from "@/lib/schedule";
+import { latestResult } from "@/lib/matches";
+import Link from "next/link";
+import Image from "next/image";
 
 export const metadata = { title: "Schedule" };
 
@@ -23,8 +26,33 @@ export default function SchedulePage() {
         </p>
       </header>
 
+      {/* Latest result -> match centre */}
+      <section className="mx-auto mt-12 max-w-7xl px-5 md:px-8">
+        <Link
+          href={`/match/${latestResult.id}`}
+          className="group flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition-colors hover:border-white/25"
+        >
+          <div className="flex items-center gap-4">
+            <span className="rounded-full border border-goal-red/40 bg-goal-red/10 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.2em] text-goal-red">Final</span>
+            <div className="flex items-center gap-3">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/brand/leaf-white.svg" alt="" className="h-6 w-auto" />
+              <span className="font-display text-2xl text-white">{latestResult.score!.tor}</span>
+              <span className="text-frost/40">-</span>
+              <span className="font-display text-2xl text-white">{latestResult.score!.opp}</span>
+              <span className="relative h-6 w-6 overflow-hidden rounded"><Image src={latestResult.game.logo} alt={latestResult.game.opponent} fill sizes="24px" className="object-cover" /></span>
+            </div>
+            <span className="hidden font-mono text-[11px] text-frost/45 sm:inline">Latest result vs {latestResult.game.opponent}</span>
+          </div>
+          <span className="inline-flex items-center gap-1 font-mono text-[11px] text-frost/50 transition-colors group-hover:text-ice-blue">
+            Match centre
+            <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+          </span>
+        </Link>
+      </section>
+
       {/* Opener countdown */}
-      <section className="mx-auto mt-14 max-w-7xl px-5 md:px-8">
+      <section className="mx-auto mt-8 max-w-7xl px-5 md:px-8">
         <div className="overflow-hidden rounded-3xl border border-white/10 bg-[radial-gradient(120%_120%_at_0%_0%,rgba(0,72,141,0.3),rgba(5,19,43,0.4))] p-7 md:p-10">
           <div className="flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
             <div>

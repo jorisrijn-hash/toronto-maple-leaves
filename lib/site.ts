@@ -19,7 +19,9 @@ export const site = {
 export const nav: { label: string; href: string }[] = [
   { label: "Team", href: "/team" },
   { label: "Schedule", href: "/schedule" },
+  { label: "Standings", href: "/standings" },
   { label: "Stats", href: "/stats" },
+  { label: "News", href: "/news" },
   { label: "Shop", href: "/shop" },
 ];
 

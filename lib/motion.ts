@@ -40,4 +40,4 @@ export const sectionLift: Variants = {
   },
 };
 
-export const VIEWPORT = { once: true, amount: 0.35 } as const;
+export const VIEWPORT = { once: true, amount: "some" } as const;

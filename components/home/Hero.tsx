@@ -76,7 +76,7 @@ export function Hero() {
 
         <WordReveal
           text="Our ice. Our city."
-          className="font-display text-[15vw] leading-[0.86] text-white sm:text-[10vw] lg:text-[8.5rem]"
+          className="font-display text-[12.5vw] leading-[0.92] text-white sm:text-[10vw] lg:text-[8.5rem]"
         />
 
         <motion.p

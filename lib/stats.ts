@@ -16,6 +16,7 @@ export type Skater = {
   g: number;
   a: number;
   p: number;
+  number?: number;
   photo?: string;
   plusMinus: number;
   pim: number;
@@ -27,17 +28,17 @@ export type Skater = {
 
 // Top scorers (leaders shown on the club stats page).
 export const skaters: Skater[] = [
-  { rank: 1, name: "William Nylander", photo: "/players/nylander.png", pos: "RW", gp: 65, g: 30, a: 49, p: 79, plusMinus: -14, pim: 16, ppg: 7, shg: 0, gwg: 4, otg: 3 },
-  { rank: 2, name: "John Tavares", photo: "/players/tavares.png", pos: "C", gp: 82, g: 31, a: 40, p: 71, plusMinus: -28, pim: 12, ppg: 12, shg: 0, gwg: 4, otg: 2 },
-  { rank: 3, name: "Matthew Knies", photo: "/players/knies.png", pos: "LW", gp: 79, g: 23, a: 43, p: 66, plusMinus: -30, pim: 29, ppg: 6, shg: 1, gwg: 3, otg: 2 },
-  { rank: 4, name: "Auston Matthews", photo: "/players/matthews.png", pos: "C", gp: 60, g: 27, a: 26, p: 53, plusMinus: -4, pim: 18, ppg: 5, shg: 0, gwg: 3, otg: 1 },
-  { rank: 5, name: "Matias Maccelli", pos: "LW", gp: 71, g: 14, a: 25, p: 39, plusMinus: -23, pim: 16, ppg: 2, shg: 0, gwg: 2, otg: 0 },
-  { rank: 6, name: "Oliver Ekman-Larsson", photo: "/players/ekman-larsson.png", pos: "D", gp: 78, g: 8, a: 31, p: 39, plusMinus: -6, pim: 70, ppg: 0, shg: 0, gwg: 0, otg: 0 },
-  { rank: 7, name: "Max Domi", photo: "/players/domi.png", pos: "C", gp: 80, g: 12, a: 24, p: 36, plusMinus: -29, pim: 95, ppg: 2, shg: 0, gwg: 3, otg: 1 },
-  { rank: 8, name: "Morgan Rielly", photo: "/players/rielly.png", pos: "D", gp: 78, g: 11, a: 25, p: 36, plusMinus: -18, pim: 29, ppg: 1, shg: 0, gwg: 2, otg: 0 },
-  { rank: 9, name: "Bobby McMann", pos: "LW", gp: 60, g: 19, a: 13, p: 32, plusMinus: -3, pim: 40, ppg: 2, shg: 0, gwg: 3, otg: 0 },
-  { rank: 10, name: "Nicholas Robertson", pos: "LW", gp: 78, g: 16, a: 16, p: 32, plusMinus: -13, pim: 10, ppg: 2, shg: 0, gwg: 2, otg: 0 },
-  { rank: 11, name: "Easton Cowan", pos: "RW", gp: 66, g: 11, a: 18, p: 29, plusMinus: -5, pim: 45, ppg: 0, shg: 0, gwg: 1, otg: 1 },
+  { rank: 1, name: "William Nylander", number: 88, photo: "/players/nylander.png", pos: "RW", gp: 65, g: 30, a: 49, p: 79, plusMinus: -14, pim: 16, ppg: 7, shg: 0, gwg: 4, otg: 3 },
+  { rank: 2, name: "John Tavares", number: 91, photo: "/players/tavares.png", pos: "C", gp: 82, g: 31, a: 40, p: 71, plusMinus: -28, pim: 12, ppg: 12, shg: 0, gwg: 4, otg: 2 },
+  { rank: 3, name: "Matthew Knies", number: 23, photo: "/players/knies.png", pos: "LW", gp: 79, g: 23, a: 43, p: 66, plusMinus: -30, pim: 29, ppg: 6, shg: 1, gwg: 3, otg: 2 },
+  { rank: 4, name: "Auston Matthews", number: 34, photo: "/players/matthews.png", pos: "C", gp: 60, g: 27, a: 26, p: 53, plusMinus: -4, pim: 18, ppg: 5, shg: 0, gwg: 3, otg: 1 },
+  { rank: 5, name: "Matias Maccelli", number: 63, pos: "LW", gp: 71, g: 14, a: 25, p: 39, plusMinus: -23, pim: 16, ppg: 2, shg: 0, gwg: 2, otg: 0 },
+  { rank: 6, name: "Oliver Ekman-Larsson", number: 95, photo: "/players/ekman-larsson.png", pos: "D", gp: 78, g: 8, a: 31, p: 39, plusMinus: -6, pim: 70, ppg: 0, shg: 0, gwg: 0, otg: 0 },
+  { rank: 7, name: "Max Domi", number: 11, photo: "/players/domi.png", pos: "C", gp: 80, g: 12, a: 24, p: 36, plusMinus: -29, pim: 95, ppg: 2, shg: 0, gwg: 3, otg: 1 },
+  { rank: 8, name: "Morgan Rielly", number: 44, photo: "/players/rielly.png", pos: "D", gp: 78, g: 11, a: 25, p: 36, plusMinus: -18, pim: 29, ppg: 1, shg: 0, gwg: 2, otg: 0 },
+  { rank: 9, name: "Bobby McMann", number: 74, pos: "LW", gp: 60, g: 19, a: 13, p: 32, plusMinus: -3, pim: 40, ppg: 2, shg: 0, gwg: 3, otg: 0 },
+  { rank: 10, name: "Nicholas Robertson", number: 89, pos: "LW", gp: 78, g: 16, a: 16, p: 32, plusMinus: -13, pim: 10, ppg: 2, shg: 0, gwg: 2, otg: 0 },
+  { rank: 11, name: "Easton Cowan", number: 53, pos: "RW", gp: 66, g: 11, a: 18, p: 29, plusMinus: -5, pim: 45, ppg: 0, shg: 0, gwg: 1, otg: 1 },
 ];
 
 export type Goalie = {
@@ -50,6 +51,7 @@ export type Goalie = {
   otl: number;
   gaa: number;
   svPct: number; // 0-1
+  number?: number;
   photo?: string;
   sa: number;
   sv: number;
@@ -57,11 +59,11 @@ export type Goalie = {
 };
 
 export const goalies: Goalie[] = [
-  { rank: 1, name: "Joseph Woll", gp: 39, gs: 38, w: 15, l: 16, otl: 7, gaa: 3.34, svPct: 0.899, sa: 1220, sv: 1097, ga: 124 },
-  { rank: 2, name: "Anthony Stolarz", photo: "/players/stolarz.png", gp: 26, gs: 25, w: 10, l: 10, otl: 4, gaa: 3.28, svPct: 0.893, sa: 708, sv: 632, ga: 76 },
-  { rank: 3, name: "Dennis Hildeby", gp: 20, gs: 14, w: 5, l: 7, otl: 4, gaa: 2.86, svPct: 0.914, sa: 548, sv: 501, ga: 48 },
-  { rank: 4, name: "Cayden Primeau", gp: 3, gs: 3, w: 2, l: 1, otl: 0, gaa: 4.3, svPct: 0.838, sa: 80, sv: 67, ga: 13 },
-  { rank: 5, name: "Artur Akhtyamov", gp: 3, gs: 2, w: 0, l: 2, otl: 0, gaa: 5.24, svPct: 0.877, sa: 81, sv: 71, ga: 11 },
+  { rank: 1, name: "Joseph Woll", number: 60, gp: 39, gs: 38, w: 15, l: 16, otl: 7, gaa: 3.34, svPct: 0.899, sa: 1220, sv: 1097, ga: 124 },
+  { rank: 2, name: "Anthony Stolarz", number: 41, photo: "/players/stolarz.png", gp: 26, gs: 25, w: 10, l: 10, otl: 4, gaa: 3.28, svPct: 0.893, sa: 708, sv: 632, ga: 76 },
+  { rank: 3, name: "Dennis Hildeby", number: 35, gp: 20, gs: 14, w: 5, l: 7, otl: 4, gaa: 2.86, svPct: 0.914, sa: 548, sv: 501, ga: 48 },
+  { rank: 4, name: "Cayden Primeau", number: 30, gp: 3, gs: 3, w: 2, l: 1, otl: 0, gaa: 4.3, svPct: 0.838, sa: 80, sv: 67, ga: 13 },
+  { rank: 5, name: "Artur Akhtyamov", number: 1, gp: 3, gs: 2, w: 0, l: 2, otl: 0, gaa: 5.24, svPct: 0.877, sa: 81, sv: 71, ga: 11 },
 ];
 
 // Franchise records — Hockey-Reference (hockey-reference.com/teams/TOR) & Britannica.

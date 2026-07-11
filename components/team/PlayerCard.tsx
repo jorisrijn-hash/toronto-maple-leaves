@@ -16,7 +16,7 @@ const POS_LABEL: Record<Skater["pos"], string> = {
   D: "Defence",
 };
 
-export function PlayerCard({ player }: { player: Skater }) {
+export function PlayerCard({ player, onOpen }: { player: Skater; onOpen?: () => void }) {
   const [open, setOpen] = useState(false);
   const timer = useRef<number | null>(null);
 
@@ -39,7 +39,16 @@ export function PlayerCard({ player }: { player: Skater }) {
       <TiltCard max={open ? 0 : 11} disabled={open}>
         <article
           data-open={open}
-          className="relative h-full overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-white/[0.05] to-white/[0.01] p-6 shadow-pop transition-[transform,box-shadow] duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transform-style:preserve-3d] data-[open=true]:scale-[1.06] data-[open=true]:shadow-[0_40px_80px_-24px_rgba(0,12,40,0.9)]"
+          onClick={onOpen}
+          role={onOpen ? "button" : undefined}
+          tabIndex={onOpen ? 0 : undefined}
+          onKeyDown={(e) => {
+            if (onOpen && (e.key === "Enter" || e.key === " ")) {
+              e.preventDefault();
+              onOpen();
+            }
+          }}
+          className="relative h-full cursor-pointer overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-white/[0.05] to-white/[0.01] p-6 shadow-pop outline-none transition-[transform,box-shadow] duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] focus-visible:ring-2 focus-visible:ring-ice-blue [transform-style:preserve-3d] data-[open=true]:scale-[1.06] data-[open=true]:shadow-[0_40px_80px_-24px_rgba(0,12,40,0.9)]"
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img

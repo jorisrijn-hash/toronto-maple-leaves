@@ -8,6 +8,7 @@ const columns: { title: string; links: { label: string; href: string; external?:
     links: [
       { label: "Roster", href: "/team" },
       { label: "Schedule", href: "/schedule" },
+      { label: "Standings", href: "/standings" },
       { label: "Stats", href: "/stats" },
     ],
   },
@@ -30,9 +31,10 @@ const columns: { title: string; links: { label: string; href: string; external?:
   {
     title: "Club",
     links: [
-      { label: "About", href: "/" },
-      { label: "Community", href: "/" },
-      { label: "Careers", href: "/" },
+      { label: "History", href: "/history" },
+      { label: "Gallery", href: "/gallery" },
+      { label: "News", href: "/news" },
+      { label: "Match centre", href: "/match/demo-final" },
     ],
   },
 ];

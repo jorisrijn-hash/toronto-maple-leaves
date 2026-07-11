@@ -7,12 +7,22 @@ import { TiltCard } from "@/components/ui/TiltCard";
 import { assets } from "@/lib/site";
 import { EASE_OUT, sectionLift, VIEWPORT } from "@/lib/motion";
 
-export function GoalieCard({ goalie }: { goalie: Goalie }) {
+export function GoalieCard({ goalie, onOpen }: { goalie: Goalie; onOpen?: () => void }) {
   const savePct = (goalie.sv / goalie.sa) * 100;
   return (
     <motion.div variants={sectionLift} className="depth-card depth-layer">
       <TiltCard max={11}>
-        <article className="relative h-full overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-white/[0.05] to-white/[0.01] p-6 shadow-pop [transform-style:preserve-3d]">
+        <article
+          onClick={onOpen}
+          role={onOpen ? "button" : undefined}
+          tabIndex={onOpen ? 0 : undefined}
+          onKeyDown={(e) => {
+            if (onOpen && (e.key === "Enter" || e.key === " ")) {
+              e.preventDefault();
+              onOpen();
+            }
+          }}
+          className="relative h-full cursor-pointer overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-white/[0.05] to-white/[0.01] p-6 shadow-pop outline-none transition-transform focus-visible:ring-2 focus-visible:ring-ice-blue [transform-style:preserve-3d]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={assets.leaf}
