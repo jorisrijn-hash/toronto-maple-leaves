@@ -115,7 +115,7 @@ export function CommandPalette() {
     <AnimatePresence>
       {open && (
         <motion.div
-          className="fixed inset-0 z-[100] flex items-start justify-center px-4 pt-[12vh]"
+          className="fixed inset-0 z-palette flex items-start justify-center px-4 pt-[12vh]"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -130,16 +130,16 @@ export function CommandPalette() {
             className="relative w-full max-w-xl overflow-hidden rounded-2xl border border-white/12 bg-ice-void shadow-2xl"
           >
             <div className="flex items-center gap-3 border-b border-white/10 px-4">
-              <svg viewBox="0 0 24 24" className="h-4 w-4 text-frost/40" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="7" /><path d="M21 21l-4.3-4.3" /></svg>
+              <svg viewBox="0 0 24 24" className="h-4 w-4 text-frost/55" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="7" /><path d="M21 21l-4.3-4.3" /></svg>
               <input
                 ref={inputRef}
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyDown={onKeyDown}
                 placeholder="Search players, pages, products, news..."
-                className="w-full bg-transparent py-4 text-sm text-white placeholder:text-frost/35 focus:outline-none"
+                className="w-full bg-transparent py-4 text-sm text-white placeholder:text-frost/55 focus:outline-none"
               />
-              <kbd className="hidden rounded border border-white/15 px-1.5 py-0.5 font-mono text-[10px] text-frost/40 sm:block">ESC</kbd>
+              <kbd className="hidden rounded border border-white/15 px-1.5 py-0.5 font-mono text-[10px] text-frost/55 sm:block">ESC</kbd>
             </div>
 
             <div className="max-h-[52vh] overflow-y-auto p-2">
@@ -157,9 +157,9 @@ export function CommandPalette() {
                   >
                     <span className="flex items-center gap-3">
                       <span className="text-sm text-white">{item.label}</span>
-                      <span className="font-mono text-[11px] text-frost/40">{item.sub}</span>
+                      <span className="font-mono text-[11px] text-frost/55">{item.sub}</span>
                     </span>
-                    <span className="rounded border border-white/10 px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-wider text-frost/40">
+                    <span className="rounded border border-white/10 px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-wider text-frost/55">
                       {item.group}
                     </span>
                   </button>

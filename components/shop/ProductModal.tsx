@@ -53,7 +53,7 @@ export function ProductModal({
     <AnimatePresence>
       {product && (
         <motion.div
-          className="fixed inset-0 z-[80] grid place-items-center p-4"
+          className="fixed inset-0 z-drawer grid place-items-center p-4"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -92,7 +92,7 @@ export function ProductModal({
 
             {/* info */}
             <div className="flex flex-col overflow-y-auto p-7 md:p-9">
-              <button onClick={onClose} className="absolute right-4 top-4 grid h-9 w-9 place-items-center rounded-full border border-white/15 bg-white/[0.03] text-frost/70 transition-colors hover:bg-white/10 hover:text-white">
+              <button onClick={onClose} aria-label="Close product details" className="absolute right-4 top-4 grid h-9 w-9 place-items-center rounded-full border border-white/15 bg-white/[0.03] text-frost/70 transition-colors hover:bg-white/10 hover:text-white">
                 <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M6 6l12 12M18 6L6 18" /></svg>
               </button>
 
@@ -149,7 +149,7 @@ export function ProductModal({
           <AnimatePresence>
             {zoom && product.image && (
               <motion.div
-                className="fixed inset-0 z-[90] grid place-items-center bg-ice-void/95 p-6"
+                className="fixed inset-0 z-lightbox grid place-items-center bg-ice-void/95 p-6"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
@@ -164,7 +164,7 @@ export function ProductModal({
                 >
                   <Image src={product.image} alt={product.name} fill sizes="90vw" className="object-contain" />
                 </motion.div>
-                <button className="absolute right-6 top-6 grid h-10 w-10 place-items-center rounded-full border border-white/20 text-white">
+                <button aria-label="Close image" className="absolute right-6 top-6 grid h-10 w-10 place-items-center rounded-full border border-white/20 text-white">
                   <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M6 6l12 12M18 6L6 18" /></svg>
                 </button>
               </motion.div>

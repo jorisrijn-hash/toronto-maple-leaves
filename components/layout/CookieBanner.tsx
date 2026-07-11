@@ -30,7 +30,7 @@ export function CookieBanner() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 24 }}
           transition={{ duration: 0.35, ease: [0.32, 0.72, 0, 1] }}
-          className="fixed inset-x-4 bottom-4 z-[70] mx-auto max-w-2xl rounded-2xl border border-white/12 bg-ice-void/95 p-5 shadow-2xl backdrop-blur-md sm:inset-x-auto sm:left-1/2 sm:w-full sm:-translate-x-1/2"
+          className="fixed inset-x-4 bottom-4 z-consent mx-auto max-w-2xl rounded-2xl border border-white/12 bg-ice-void/95 p-5 shadow-2xl backdrop-blur-md sm:inset-x-auto sm:left-1/2 sm:w-full sm:-translate-x-1/2"
         >
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-sm text-frost/75">

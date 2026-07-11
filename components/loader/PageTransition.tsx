@@ -79,7 +79,7 @@ export function PageTransition() {
   return (
     <motion.div
       aria-hidden="true"
-      className="fixed inset-0 z-[95] grid place-items-center overflow-hidden bg-[linear-gradient(180deg,#00205b_0%,#05132b_100%)]"
+      className="fixed inset-0 z-lightbox grid place-items-center overflow-hidden bg-[linear-gradient(180deg,#00205b_0%,#05132b_100%)]"
       style={{ pointerEvents: phase === "idle" ? "none" : "auto" }}
       variants={variants}
       initial="idle"

@@ -50,7 +50,7 @@ export function SiteNav() {
   return (
     <header
       className={clsx(
-        "fixed inset-x-0 top-[var(--ann-h,0px)] z-50 transition-[top,background-color,border-color] duration-300 ease-out",
+        "fixed inset-x-0 top-[var(--ann-h,0px)] z-nav transition-[top,background-color,border-color] duration-300 ease-out",
         scrolled
           ? "border-b border-white/10 bg-ice-void/80 backdrop-blur-md"
           : "border-b border-transparent bg-transparent"

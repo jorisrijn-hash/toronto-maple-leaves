@@ -37,12 +37,14 @@ export function Gallery({ keys }: { keys: PhotoKey[] }) {
 
   return (
     <>
+      {/* CSS columns rather than a grid: row-span + aspect-ratio fight each other
+          under align-items: stretch and leave holes. Columns are deterministic. */}
       <motion.div
         variants={revealContainer}
         initial="hidden"
         whileInView="show"
         viewport={VIEWPORT}
-        className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4"
+        className="columns-2 gap-3 md:columns-3 lg:columns-4 [&>*]:mb-3"
       >
         {keys.map((key, i) => {
           const p = photos[key];
@@ -51,8 +53,8 @@ export function Gallery({ keys }: { keys: PhotoKey[] }) {
               key={key}
               variants={revealItem}
               onClick={() => setIndex(i)}
-              className={`group relative overflow-hidden rounded-xl border border-white/10 bg-white/[0.03] outline-none focus-visible:ring-2 focus-visible:ring-ice-blue ${
-                p.tall ? "row-span-2 aspect-[3/4] md:aspect-[3/4]" : "aspect-[4/3]"
+              className={`group relative block w-full break-inside-avoid overflow-hidden rounded-xl border border-white/10 bg-white/[0.03] outline-none transition-colors hover:border-white/30 focus-visible:ring-2 focus-visible:ring-ice-blue ${
+                p.tall ? "aspect-[3/4]" : "aspect-[4/3]"
               }`}
             >
               <Image
@@ -60,9 +62,9 @@ export function Gallery({ keys }: { keys: PhotoKey[] }) {
                 alt={p.alt}
                 fill
                 sizes="(max-width: 768px) 50vw, 25vw"
-                className="object-cover transition-transform duration-500 group-hover:scale-[1.06]"
+                className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
               />
-              <span className="absolute inset-0 bg-gradient-to-t from-ice-void/60 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+              <span className="absolute inset-0 bg-gradient-to-t from-ice-void/70 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
               <span className="absolute bottom-3 left-3 right-3 translate-y-2 text-left font-mono text-[10px] uppercase tracking-wider text-frost/80 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
                 {p.credit}
               </span>
@@ -74,7 +76,7 @@ export function Gallery({ keys }: { keys: PhotoKey[] }) {
       <AnimatePresence>
         {open && current && (
           <motion.div
-            className="fixed inset-0 z-[95] flex items-center justify-center p-4"
+            className="fixed inset-0 z-lightbox flex items-center justify-center p-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -101,7 +103,7 @@ export function Gallery({ keys }: { keys: PhotoKey[] }) {
               </div>
               <figcaption className="mt-3 flex items-center justify-between gap-4">
                 <span className="text-sm text-frost/70">{current.alt}</span>
-                <span className="shrink-0 font-mono text-[11px] uppercase tracking-wider text-frost/45">
+                <span className="shrink-0 font-mono text-[11px] uppercase tracking-wider text-frost/60">
                   {current.credit} · {index! + 1}/{keys.length}
                 </span>
               </figcaption>

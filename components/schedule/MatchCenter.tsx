@@ -8,6 +8,8 @@ import type { MatchDetail } from "@/lib/matches";
 import { lines, pairs, starter } from "@/lib/matches";
 import { assets } from "@/lib/site";
 import { EASE_OUT } from "@/lib/motion";
+import { PlayerAvatar } from "@/components/team/PlayerAvatar";
+import { getPlayerByName } from "@/lib/players";
 
 const TABS = ["Summary", "Lineups", "Boxscore"] as const;
 type Tab = (typeof TABS)[number];
@@ -37,9 +39,9 @@ export function MatchCenter({ match }: { match: MatchDetail }) {
             {match.final && match.score ? (
               <div className="text-center">
                 <div className="font-display text-6xl leading-none text-white">
-                  {match.score.tor}<span className="mx-2 text-frost/30">-</span>{match.score.opp}
+                  {match.score.tor}<span className="mx-2 text-frost/55">-</span>{match.score.opp}
                 </div>
-                <div className="mt-2 font-mono text-[11px] uppercase tracking-[0.2em] text-goal-red">Final</div>
+                <div className="mt-2 font-mono text-[11px] uppercase tracking-[0.2em] text-goal-red-ink">Final</div>
               </div>
             ) : (
               <div className="text-center">
@@ -114,15 +116,21 @@ function Summary({ match }: { match: MatchDetail }) {
           <ul className="divide-y divide-white/5">
             {match.scoring.map((s, i) => (
               <li key={i} className="flex items-center gap-3 py-3">
-                <span className="w-14 shrink-0 font-mono text-[11px] text-frost/45">P{s.period} · {s.time}</span>
-                <span className={`grid h-6 w-6 place-items-center rounded-full text-[10px] font-mono ${s.team === "TOR" ? "bg-ice-blue/15 text-ice-blue" : "bg-white/10 text-frost/60"}`}>
-                  {s.team === "TOR" ? "TOR" : match.game.abbr}
-                </span>
+                <span className="w-14 shrink-0 font-mono text-[11px] text-frost/60">P{s.period} · {s.time}</span>
+
+                {s.team === "TOR" ? (
+                  <PlayerAvatar name={s.scorer} size="md" />
+                ) : (
+                  <span className="relative grid h-9 w-9 shrink-0 place-items-center overflow-hidden rounded-full border border-white/15">
+                    <Image src={match.game.logo} alt={match.game.opponent} fill sizes="36px" className="object-cover" />
+                  </span>
+                )}
+
                 <span className="flex-1 text-sm text-white">
                   {s.scorer}
                   {s.assists.length > 0 && <span className="text-frost/50"> ({s.assists.join(", ")})</span>}
                 </span>
-                {s.strength !== "EV" && <span className="font-mono text-[10px] text-goal-red">{s.strength}</span>}
+                {s.strength !== "EV" && <span className="font-mono text-[10px] text-goal-red-ink">{s.strength}</span>}
               </li>
             ))}
           </ul>
@@ -131,7 +139,12 @@ function Summary({ match }: { match: MatchDetail }) {
           <ol className="space-y-3">
             {match.stars?.map((st, i) => (
               <li key={st.name} className="flex items-center gap-3">
-                <span className="grid h-7 w-7 place-items-center rounded-full bg-ice-blue/15 font-display text-sm text-ice-blue">{i + 1}</span>
+                <span className="relative">
+                  <PlayerAvatar name={st.name} size="md" />
+                  <span className="absolute -bottom-0.5 -left-0.5 grid h-4 w-4 place-items-center rounded-full bg-ice-blue font-mono text-[9px] font-semibold text-ice-void">
+                    {i + 1}
+                  </span>
+                </span>
                 <span className="flex-1 text-sm text-white">{st.name}</span>
                 <span className="font-mono text-xs text-frost/50">{st.line}</span>
               </li>
@@ -162,20 +175,51 @@ function Summary({ match }: { match: MatchDetail }) {
   );
 }
 
+function PlayerChip({ name, accent = false }: { name: string; accent?: boolean }) {
+  const player = getPlayerByName(name);
+
+  const body = (
+    <>
+      <PlayerAvatar name={name} size="sm" link={false} />
+      {name}
+    </>
+  );
+
+  const cls = `flex items-center gap-2 rounded-full border py-1 pl-1 pr-3 text-sm outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ice-blue ${
+    accent
+      ? "border-ice-blue/30 bg-ice-blue/10 text-white hover:border-ice-blue/60"
+      : "border-white/10 bg-white/[0.03] text-frost/85 hover:border-white/30 hover:text-white"
+  }`;
+
+  if (!player) return <span className={cls}>{body}</span>;
+
+  return (
+    <Link href={`/team/${player.slug}`} className={cls}>
+      {body}
+    </Link>
+  );
+}
+
+function Unit({ label, names }: { label: string; names: string[] }) {
+  return (
+    <div className="flex items-start gap-3">
+      <span className="mt-2 w-6 shrink-0 font-mono text-[11px] text-frost/55">{label}</span>
+      <div className="flex flex-1 flex-wrap gap-2">
+        {names.map((n) => (
+          <PlayerChip key={n} name={n} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function Lineups() {
   return (
     <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr]">
       <Card title="Projected forward lines">
         <div className="space-y-3">
           {lines.map((line, i) => (
-            <div key={i} className="flex items-center gap-2">
-              <span className="w-6 shrink-0 font-mono text-[11px] text-frost/40">L{i + 1}</span>
-              <div className="flex flex-1 flex-wrap gap-2">
-                {line.map((n) => (
-                  <span key={n} className="rounded-lg border border-white/10 bg-white/[0.03] px-3 py-1.5 text-sm text-frost/85">{n}</span>
-                ))}
-              </div>
-            </div>
+            <Unit key={i} label={`L${i + 1}`} names={line} />
           ))}
         </div>
       </Card>
@@ -183,19 +227,12 @@ function Lineups() {
         <Card title="Defence pairs">
           <div className="space-y-3">
             {pairs.map((pair, i) => (
-              <div key={i} className="flex items-center gap-2">
-                <span className="w-6 shrink-0 font-mono text-[11px] text-frost/40">D{i + 1}</span>
-                <div className="flex flex-1 flex-wrap gap-2">
-                  {pair.map((n) => (
-                    <span key={n} className="rounded-lg border border-white/10 bg-white/[0.03] px-3 py-1.5 text-sm text-frost/85">{n}</span>
-                  ))}
-                </div>
-              </div>
+              <Unit key={i} label={`D${i + 1}`} names={pair} />
             ))}
           </div>
         </Card>
         <Card title="Starting goaltender">
-          <span className="rounded-lg border border-ice-blue/30 bg-ice-blue/10 px-3 py-1.5 text-sm text-white">{starter}</span>
+          <PlayerChip name={starter} accent />
         </Card>
       </div>
     </div>
@@ -215,7 +252,7 @@ function Boxscore({ match }: { match: MatchDetail }) {
       <Card title="By period">
         <table className="w-full text-sm">
           <thead>
-            <tr className="font-mono text-[11px] uppercase tracking-wider text-frost/45">
+            <tr className="font-mono text-[11px] uppercase tracking-wider text-frost/60">
               <th className="text-left font-normal">Team</th>
               {match.periods.map((_, i) => (
                 <th key={i} className="w-10 text-center font-normal">{i + 1}</th>

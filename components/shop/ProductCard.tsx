@@ -53,7 +53,7 @@ export function ProductCard({
               <div className="absolute inset-0 grid place-items-center bg-[radial-gradient(120%_120%_at_50%_0%,#0b3a75,#00234c_60%,#05132b)]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={assets.leaf} alt="" className="h-24 w-auto opacity-20" />
-                <span className="absolute bottom-3 left-3 font-mono text-[10px] uppercase tracking-[0.2em] text-frost/40">
+                <span className="absolute bottom-3 left-3 font-mono text-[10px] uppercase tracking-[0.2em] text-frost/55">
                   {product.category}
                 </span>
               </div>

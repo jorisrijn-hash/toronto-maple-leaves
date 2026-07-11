@@ -32,7 +32,7 @@ export function AnnouncementBar() {
           animate={{ y: 0 }}
           exit={{ y: "-100%" }}
           transition={{ duration: 0.3, ease: [0.32, 0.72, 0, 1] }}
-          className="fixed inset-x-0 top-0 z-[60] flex h-10 items-center justify-center gap-3 bg-goal-red px-4 text-center"
+          className="fixed inset-x-0 top-0 z-announce flex h-10 items-center justify-center gap-3 bg-goal-red px-4 text-center"
         >
           <Link href="/tickets" className="flex items-center gap-2 text-[13px] font-medium text-white">
             <span className="hidden sm:inline">Pre-season tickets on sale July 23.</span>

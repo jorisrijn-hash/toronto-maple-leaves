@@ -75,7 +75,7 @@ export function TrophyRoom() {
             </p>
             <p className="mt-2 text-sm text-frost/70">
               {r.holder}
-              {"note" in r && r.note ? <span className="text-frost/45"> · {r.note}</span> : null}
+              {"note" in r && r.note ? <span className="text-frost/60"> · {r.note}</span> : null}
             </p>
           </motion.div>
         ))}

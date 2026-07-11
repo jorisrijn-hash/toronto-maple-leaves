@@ -4,6 +4,7 @@ import "@fontsource-variable/archivo";
 import "@fontsource-variable/jetbrains-mono";
 import "./globals.css";
 import { AppChrome } from "@/components/providers/AppChrome";
+import { MotionProvider } from "@/components/providers/MotionProvider";
 import { SiteNav } from "@/components/nav/SiteNav";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { LivingRink } from "@/components/ui/LivingRink";
@@ -26,11 +27,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang={site.locale}>
       <body>
-        <AppChrome />
-        <LivingRink />
-        <SiteNav />
-        <main className="relative">{children}</main>
-        <SiteFooter />
+        <MotionProvider>
+          <AppChrome />
+          <LivingRink />
+          <SiteNav />
+          <main className="relative">{children}</main>
+          <SiteFooter />
+        </MotionProvider>
       </body>
     </html>
   );

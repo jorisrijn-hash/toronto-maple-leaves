@@ -39,7 +39,7 @@ export function GoalieCard({ goalie, onOpen }: { goalie: Goalie; onOpen?: () => 
               <span className="rounded-full border border-ice-blue/30 bg-ice-blue/10 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.2em] text-ice-blue">
                 G
               </span>
-              <span className="font-mono text-[11px] text-frost/35">
+              <span className="font-mono text-[11px] text-frost/55">
                 #{String(goalie.rank).padStart(2, "0")}
               </span>
             </div>
@@ -59,12 +59,12 @@ export function GoalieCard({ goalie, onOpen }: { goalie: Goalie; onOpen?: () => 
             </div>
 
             <h3 className="mt-4 font-display text-2xl leading-[0.95] text-white">{goalie.name}</h3>
-            <p className="mt-1 font-mono text-[11px] uppercase tracking-wider text-frost/45">
+            <p className="mt-1 font-mono text-[11px] uppercase tracking-wider text-frost/60">
               {goalie.w}-{goalie.l}-{goalie.otl} · {goalie.gaa.toFixed(2)} GAA
             </p>
 
             <div className="mt-5 border-t border-white/10 pt-4">
-              <div className="mb-1.5 flex justify-between font-mono text-[10px] uppercase tracking-wider text-frost/45">
+              <div className="mb-1.5 flex justify-between font-mono text-[10px] uppercase tracking-wider text-frost/60">
                 <span>{goalie.gp} GP</span>
                 <span>{goalie.sa} shots</span>
               </div>

@@ -66,7 +66,7 @@ export function GoalieComparison({ data }: { data: Goalie[] }) {
               </div>
               <div className="mt-2 flex items-center justify-between font-mono text-[11px] text-frost/50">
                 <span className="text-ice-blue">{g.sv} SV</span>
-                <span className="text-goal-red/90">{g.ga} GA</span>
+                <span className="text-goal-red-ink">{g.ga} GA</span>
               </div>
             </div>
           </motion.article>

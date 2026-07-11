@@ -8,7 +8,7 @@ import { revealContainer, sectionLift, VIEWPORT } from "@/lib/motion";
 const STATUS_STYLE: Record<TicketPackage["status"], string> = {
   "Coming soon": "border-ice-blue/30 bg-ice-blue/10 text-ice-blue",
   Available: "border-emerald-400/30 bg-emerald-400/10 text-emerald-300",
-  "Sold out": "border-goal-red/40 bg-goal-red/10 text-goal-red",
+  "Sold out": "border-goal-red/40 bg-goal-red/10 text-goal-red-ink",
   Waitlist: "border-white/20 bg-white/5 text-frost/60",
 };
 

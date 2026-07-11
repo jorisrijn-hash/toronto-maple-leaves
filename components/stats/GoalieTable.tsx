@@ -49,7 +49,7 @@ export function GoalieTable({ data }: { data: Goalie[] }) {
               className="group border-b border-white/5 transition-colors hover:bg-ice-blue/[0.06]"
             >
               <td className="sticky left-0 bg-ice-void/40 px-4 py-3 text-left group-hover:bg-[#0a2350]">
-                <span className="mr-3 font-mono text-xs text-frost/35">{String(i + 1).padStart(2, "0")}</span>
+                <span className="mr-3 font-mono text-xs text-frost/55">{String(i + 1).padStart(2, "0")}</span>
                 <span className="font-medium text-white">{g.name}</span>
               </td>
               {COLS.map((c) => (

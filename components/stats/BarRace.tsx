@@ -43,7 +43,7 @@ export function BarRace({ data }: { data: Skater[] }) {
               }}
               className="grid grid-cols-[1.4rem_9rem_1fr_auto] items-center gap-3 md:grid-cols-[1.6rem_11rem_1fr_auto] md:gap-4"
             >
-              <span className="font-mono text-xs text-frost/40">{String(s.rank).padStart(2, "0")}</span>
+              <span className="font-mono text-xs text-frost/55">{String(s.rank).padStart(2, "0")}</span>
               <span className="truncate text-sm font-medium text-white">
                 {s.name}
                 <span className="ml-1.5 font-mono text-[10px] text-ice-blue/70">{s.pos}</span>

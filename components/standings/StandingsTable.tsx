@@ -10,7 +10,7 @@ export function StandingsTable() {
   return (
     <motion.div variants={revealContainer} initial="hidden" whileInView="show" viewport={VIEWPORT}>
       {/* header */}
-      <div className="grid grid-cols-[2rem_1fr_repeat(4,2.2rem)] items-center gap-2 border-b border-white/10 px-3 py-3 font-mono text-[10px] uppercase tracking-wider text-frost/45 sm:grid-cols-[2rem_1fr_repeat(8,2.4rem)_3.4rem]">
+      <div className="grid grid-cols-[2rem_1fr_repeat(4,2.2rem)] items-center gap-2 border-b border-white/10 px-3 py-3 font-mono text-[10px] uppercase tracking-wider text-frost/60 sm:grid-cols-[2rem_1fr_repeat(8,2.4rem)_3.4rem]">
         <span>#</span>
         <span>Team</span>
         {COLS.map((c, i) => (
@@ -53,7 +53,7 @@ export function StandingsTable() {
             <Cell className="font-semibold text-white">{t.pts}</Cell>
             <Cell hide>{t.gf}</Cell>
             <Cell hide>{t.ga}</Cell>
-            <Cell hide className={diff >= 0 ? "text-emerald-300" : "text-goal-red"}>
+            <Cell hide className={diff >= 0 ? "text-emerald-300" : "text-goal-red-ink"}>
               {diff > 0 ? `+${diff}` : diff}
             </Cell>
             <span className="hidden text-right font-mono text-[11px] text-frost/50 sm:block">{t.l10}</span>

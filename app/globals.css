@@ -79,6 +79,11 @@
     text-wrap: balance;
   }
 
+  /* Long-form prose: reduces orphans without the even-lines behaviour of balance. */
+  .text-pretty {
+    text-wrap: pretty;
+  }
+
   /* Focus-blur pop-out: when a group is hovered, siblings marked .depth-recede blur back. */
   .depth-layer {
     transition: filter 320ms var(--ease-out), transform 320ms var(--ease-out),

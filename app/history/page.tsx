@@ -87,7 +87,7 @@ export default function HistoryPage() {
             <div key={rec.label} className="flex items-center justify-between rounded-xl border border-white/10 bg-white/[0.03] p-5">
               <div>
                 <div className="text-sm text-white">{rec.holder}</div>
-                <div className="mt-0.5 font-mono text-[11px] uppercase tracking-wider text-frost/45">
+                <div className="mt-0.5 font-mono text-[11px] uppercase tracking-wider text-frost/60">
                   {rec.label}
                   {"note" in rec && rec.note ? ` · ${rec.note}` : ""}
                 </div>

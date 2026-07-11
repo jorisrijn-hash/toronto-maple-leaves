@@ -21,7 +21,7 @@ export default function StandingsPage() {
         <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02]">
           <StandingsTable />
         </div>
-        <div className="mt-4 flex items-center gap-2 font-mono text-[11px] text-frost/40">
+        <div className="mt-4 flex items-center gap-2 font-mono text-[11px] text-frost/55">
           <span className="inline-block h-2 w-6 rounded-full bg-gradient-to-r from-goal-red/60 to-transparent" />
           Top three clinch a divisional playoff berth. {standingsMeta.note}
         </div>

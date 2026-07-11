@@ -21,7 +21,7 @@ export function RosterSection({
           <p className="font-mono text-xs uppercase tracking-[0.3em] text-ice-blue">{kicker}</p>
           <h2 className="mt-2 font-display text-4xl text-white md:text-5xl">{title}</h2>
         </div>
-        <span className="font-mono text-sm text-frost/40">{count}</span>
+        <span className="font-mono text-sm text-frost/55">{count}</span>
       </div>
 
       <motion.div

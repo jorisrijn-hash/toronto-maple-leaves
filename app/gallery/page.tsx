@@ -42,7 +42,7 @@ export default function GalleryPage() {
       <section className="mx-auto mt-12 max-w-7xl px-5 md:px-8">
         <Gallery keys={keys} />
 
-        <p className="mt-8 font-mono text-[11px] leading-relaxed text-frost/40">
+        <p className="mt-8 font-mono text-[11px] leading-relaxed text-frost/55">
           Photography: {photoCredits.join(", ")}. Free to use under the Pexels license.
         </p>
       </section>

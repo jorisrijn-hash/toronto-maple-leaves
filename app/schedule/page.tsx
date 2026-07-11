@@ -33,16 +33,16 @@ export default function SchedulePage() {
           className="group flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition-colors hover:border-white/25"
         >
           <div className="flex items-center gap-4">
-            <span className="rounded-full border border-goal-red/40 bg-goal-red/10 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.2em] text-goal-red">Final</span>
+            <span className="rounded-full border border-goal-red/40 bg-goal-red/10 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.2em] text-goal-red-ink">Final</span>
             <div className="flex items-center gap-3">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/brand/leaf-white.svg" alt="" className="h-6 w-auto" />
               <span className="font-display text-2xl text-white">{latestResult.score!.tor}</span>
-              <span className="text-frost/40">-</span>
+              <span className="text-frost/55">-</span>
               <span className="font-display text-2xl text-white">{latestResult.score!.opp}</span>
               <span className="relative h-6 w-6 overflow-hidden rounded"><Image src={latestResult.game.logo} alt={latestResult.game.opponent} fill sizes="24px" className="object-cover" /></span>
             </div>
-            <span className="hidden font-mono text-[11px] text-frost/45 sm:inline">Latest result vs {latestResult.game.opponent}</span>
+            <span className="hidden font-mono text-[11px] text-frost/60 sm:inline">Latest result vs {latestResult.game.opponent}</span>
           </div>
           <span className="inline-flex items-center gap-1 font-mono text-[11px] text-frost/50 transition-colors group-hover:text-ice-blue">
             Match centre
@@ -78,7 +78,7 @@ export default function SchedulePage() {
           <h2 className="mt-2 font-display text-4xl text-white md:text-5xl">Pre-season slate</h2>
         </div>
         <ScheduleGames />
-        <p className="mt-6 font-mono text-[11px] text-frost/40">{scheduleMeta.note}</p>
+        <p className="mt-6 font-mono text-[11px] text-frost/55">{scheduleMeta.note}</p>
       </section>
     </div>
   );

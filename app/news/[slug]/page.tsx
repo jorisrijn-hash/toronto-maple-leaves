@@ -48,12 +48,15 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
           </div>
         </div>
 
+        {/* Measure capped at 68ch: max-w-3xl at 18px ran to ~85 characters a line. */}
         <div className="mx-auto mt-10 max-w-3xl px-5 md:px-8">
-          {article.body.map((p, i) => (
-            <p key={i} className="mb-5 text-lg leading-relaxed text-frost/80">
-              {p}
-            </p>
-          ))}
+          <div className="max-w-[68ch]">
+            {article.body.map((p, i) => (
+              <p key={i} className="mb-5 text-pretty text-lg leading-relaxed text-frost/80">
+                {p}
+              </p>
+            ))}
+          </div>
         </div>
       </article>
 

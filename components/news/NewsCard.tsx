@@ -25,7 +25,7 @@ export function NewsCard({ article, large = false }: { article: Article; large?:
           </span>
         </div>
         <div className="p-5">
-          <div className="mb-2 flex items-center gap-2 font-mono text-[11px] text-frost/45">
+          <div className="mb-2 flex items-center gap-2 font-mono text-[11px] text-frost/60">
             <span>{formatDate(article.date)}</span>
             <span>·</span>
             <span>{article.readMins} min read</span>

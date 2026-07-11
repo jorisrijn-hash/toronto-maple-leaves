@@ -91,7 +91,7 @@ export function SiteFooter() {
                 <input
                   type="email"
                   placeholder="you@email.com"
-                  className="w-full rounded-full border border-white/12 bg-white/[0.03] px-4 py-2.5 text-sm text-white placeholder:text-frost/35 focus:border-ice-blue/50 focus:outline-none"
+                  className="w-full rounded-full border border-white/12 bg-white/[0.03] px-4 py-2.5 text-sm text-white placeholder:text-frost/55 focus:border-ice-blue/50 focus:outline-none"
                 />
                 <button className="shrink-0 rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-ice-void transition-transform duration-150 hover:scale-[1.03] active:scale-[0.97]">
                   Join
@@ -121,7 +121,7 @@ export function SiteFooter() {
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
             {columns.map((col) => (
               <nav key={col.title}>
-                <h3 className="font-mono text-[11px] uppercase tracking-[0.2em] text-frost/45">
+                <h3 className="font-mono text-[11px] uppercase tracking-[0.2em] text-frost/60">
                   {col.title}
                 </h3>
                 <ul className="mt-4 space-y-2.5">
@@ -140,7 +140,7 @@ export function SiteFooter() {
 
         {/* partners line */}
         <div className="mt-14 border-t border-white/10 pt-8">
-          <p className="mb-3 font-mono text-[11px] uppercase tracking-[0.2em] text-frost/45">
+          <p className="mb-3 font-mono text-[11px] uppercase tracking-[0.2em] text-frost/60">
             Official partners
           </p>
           <div className="flex flex-wrap gap-x-6 gap-y-2">
@@ -159,7 +159,7 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="mt-10 flex flex-col gap-3 border-t border-white/10 pt-6 text-xs text-frost/45 md:flex-row md:items-center md:justify-between">
+        <div className="mt-10 flex flex-col gap-3 border-t border-white/10 pt-6 text-xs text-frost/60 md:flex-row md:items-center md:justify-between">
           <p>
             © {new Date().getFullYear()} {site.name}. Concept redesign.
           </p>

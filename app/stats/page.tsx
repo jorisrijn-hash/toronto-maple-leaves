@@ -48,7 +48,7 @@ export default function StatsPage() {
       <section className="mx-auto mt-20 max-w-7xl px-5 md:px-8">
         <Heading kicker="Skaters" title="Scoring leaders" />
         <SkaterTable data={skaters} />
-        <p className="mt-3 font-mono text-[11px] text-frost/40">
+        <p className="mt-3 font-mono text-[11px] text-frost/55">
           Tap any column to sort. Data: {statContext.season} regular season.
         </p>
       </section>

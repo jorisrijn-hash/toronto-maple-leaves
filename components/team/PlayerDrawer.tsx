@@ -42,7 +42,7 @@ export function PlayerDrawer({
   return (
     <AnimatePresence>
       {player && (
-        <motion.div className="fixed inset-0 z-[85]" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+        <motion.div className="fixed inset-0 z-drawer" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
           <div className="absolute inset-0 bg-ice-void/70 backdrop-blur-sm" onClick={onClose} />
 
           <motion.aside
@@ -56,6 +56,7 @@ export function PlayerDrawer({
             <div className="relative overflow-hidden border-b border-white/10 bg-[radial-gradient(120%_120%_at_80%_-10%,rgba(0,72,141,0.5),rgba(5,19,43,0.2))] p-6 pt-7">
               <button
                 onClick={onClose}
+                aria-label="Close player details"
                 className="absolute right-4 top-4 z-10 grid h-9 w-9 place-items-center rounded-full border border-white/15 text-frost/70 transition-colors hover:bg-white/10 hover:text-white"
               >
                 <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M6 6l12 12M18 6L6 18" /></svg>
@@ -86,7 +87,7 @@ export function PlayerDrawer({
             </div>
 
             <div className="flex-1 overflow-y-auto p-6">
-              <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-frost/45">2025-26 season</p>
+              <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-frost/60">2025-26 season</p>
               <div className="mt-3 grid grid-cols-3 gap-2">
                 {player.kind === "skater" ? (
                   <>

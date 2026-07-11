@@ -84,7 +84,7 @@ export function SkaterTable({ data }: { data: Skater[] }) {
               className="group border-b border-white/5 transition-colors hover:bg-ice-blue/[0.06]"
             >
               <td className="sticky left-0 bg-ice-void/40 px-4 py-3 text-left group-hover:bg-[#0a2350]">
-                <span className="mr-3 font-mono text-xs text-frost/35">{String(i + 1).padStart(2, "0")}</span>
+                <span className="mr-3 font-mono text-xs text-frost/55">{String(i + 1).padStart(2, "0")}</span>
                 <span className="font-medium text-white">{s.name}</span>
               </td>
               <td className="px-2 py-3 text-center font-mono text-xs text-ice-blue/80">{s.pos}</td>
@@ -109,7 +109,7 @@ export function SkaterTable({ data }: { data: Skater[] }) {
                         </span>
                       </span>
                     ) : c.key === "plusMinus" ? (
-                      <span className={val > 0 ? "text-emerald-400" : val < 0 ? "text-goal-red/90" : ""}>
+                      <span className={val > 0 ? "text-emerald-400" : val < 0 ? "text-goal-red-ink" : ""}>
                         {val > 0 ? `+${val}` : val}
                       </span>
                     ) : (

@@ -40,7 +40,7 @@ export function CursorFX() {
       {/* spotlight — lights content beneath the pointer */}
       <div
         aria-hidden
-        className="pointer-events-none fixed inset-0 z-[60] mix-blend-screen"
+        className="pointer-events-none fixed inset-0 z-announce mix-blend-screen"
         style={{
           background:
             "radial-gradient(220px circle at var(--cursor-x) var(--cursor-y), rgba(99,179,255,0.12), transparent 60%)",
@@ -49,15 +49,19 @@ export function CursorFX() {
       {/* trailing ring */}
       <motion.div
         aria-hidden
-        className="pointer-events-none fixed left-0 top-0 z-[61]"
+        className="pointer-events-none fixed left-0 top-0 z-cursor"
         style={{ x: rx, y: ry }}
       >
         <div
-          className="-translate-x-1/2 -translate-y-1/2 rounded-full border border-ice-blue/60"
+          className="rounded-full border border-ice-blue/60"
           style={{
-            width: active ? 48 : 26,
-            height: active ? 48 : 26,
-            transition: "width 180ms ease, height 180ms ease, background-color 180ms ease",
+            // Fixed box, scaled on the compositor. Animating width/height here
+            // triggered layout on every hover; transform does not.
+            width: 26,
+            height: 26,
+            transform: `translate(-50%, -50%) scale(${active ? 48 / 26 : 1})`,
+            transition:
+              "transform 180ms cubic-bezier(0.23, 1, 0.32, 1), background-color 180ms ease",
             backgroundColor: active ? "rgba(99,179,255,0.10)" : "transparent",
             boxShadow: "0 0 12px rgba(99,179,255,0.35)",
           }}

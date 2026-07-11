@@ -63,7 +63,7 @@ export function PlayerCard({ player, onOpen }: { player: Skater; onOpen?: () => 
               <span className="rounded-full border border-ice-blue/30 bg-ice-blue/10 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.2em] text-ice-blue">
                 {player.pos}
               </span>
-              <span className="font-mono text-[11px] text-frost/35">
+              <span className="font-mono text-[11px] text-frost/55">
                 #{String(player.rank).padStart(2, "0")}
               </span>
             </div>
@@ -87,7 +87,7 @@ export function PlayerCard({ player, onOpen }: { player: Skater; onOpen?: () => 
             </div>
 
             <h3 className="mt-4 font-display text-2xl leading-[0.95] text-white">{player.name}</h3>
-            <p className="mt-1 font-mono text-[11px] uppercase tracking-wider text-frost/45">
+            <p className="mt-1 font-mono text-[11px] uppercase tracking-wider text-frost/60">
               {POS_LABEL[player.pos]}
             </p>
 
@@ -148,7 +148,7 @@ function Stat({ label, value }: { label: string; value: number }) {
   return (
     <div className="text-center">
       <div className="text-base font-semibold text-white">{value}</div>
-      <div className="mt-0.5 text-[10px] uppercase tracking-wider text-frost/45">{label}</div>
+      <div className="mt-0.5 text-[10px] uppercase tracking-wider text-frost/60">{label}</div>
     </div>
   );
 }

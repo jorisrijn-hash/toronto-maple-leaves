@@ -29,6 +29,20 @@ export function getPlayer(slug: string): RosterPlayer | undefined {
   return roster.find((p) => p.slug === slug);
 }
 
+export function getPlayerByName(name: string): RosterPlayer | undefined {
+  return roster.find((p) => p.name === name);
+}
+
+// Fallback monogram for the eight skaters without a headshot.
+export function initials(name: string): string {
+  return name
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0]?.toUpperCase() ?? "")
+    .join("");
+}
+
 // Descriptive blurb derived only from the player's own stat line, so nothing is invented.
 export function playerBlurb(p: RosterPlayer): string {
   if (p.kind === "goalie") {

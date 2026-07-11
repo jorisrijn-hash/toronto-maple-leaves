@@ -40,7 +40,7 @@ export function BagDrawer({
   return (
     <AnimatePresence>
       {open && (
-        <motion.div className="fixed inset-0 z-[85]" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+        <motion.div className="fixed inset-0 z-drawer" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
           <div className="absolute inset-0 bg-ice-void/70 backdrop-blur-sm" onClick={onClose} />
 
           <motion.aside
@@ -54,7 +54,7 @@ export function BagDrawer({
               <h2 className="font-display text-2xl text-white">
                 Your bag <span className="font-mono text-sm text-frost/50">({count})</span>
               </h2>
-              <button onClick={onClose} className="grid h-9 w-9 place-items-center rounded-full border border-white/15 text-frost/70 transition-colors hover:bg-white/10 hover:text-white">
+              <button onClick={onClose} aria-label="Close bag" className="grid h-9 w-9 place-items-center rounded-full border border-white/15 text-frost/70 transition-colors hover:bg-white/10 hover:text-white">
                 <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M6 6l12 12M18 6L6 18" /></svg>
               </button>
             </div>
@@ -79,11 +79,11 @@ export function BagDrawer({
                       <div className="flex flex-1 flex-col">
                         <div className="flex justify-between gap-2">
                           <p className="text-sm font-medium leading-tight text-white">{item.product.name}</p>
-                          <button onClick={() => onRemove(i)} className="text-frost/40 transition-colors hover:text-goal-red">
+                          <button onClick={() => onRemove(i)} className="text-frost/55 transition-colors hover:text-goal-red-ink">
                             <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M6 6l12 12M18 6L6 18" /></svg>
                           </button>
                         </div>
-                        <p className="mt-0.5 font-mono text-[11px] text-frost/45">Size {item.size}</p>
+                        <p className="mt-0.5 font-mono text-[11px] text-frost/60">Size {item.size}</p>
                         <div className="mt-auto flex items-center justify-between">
                           <div className="flex items-center gap-2 rounded-full border border-white/12">
                             <button onClick={() => onQty(i, -1)} className="grid h-7 w-7 place-items-center text-frost/70 hover:text-white">−</button>
@@ -104,14 +104,14 @@ export function BagDrawer({
                 <span>Subtotal</span>
                 <span className="font-mono text-white">CA${subtotal.toFixed(2)}</span>
               </div>
-              <p className="mb-4 font-mono text-[11px] text-frost/40">Taxes and shipping calculated at checkout.</p>
+              <p className="mb-4 font-mono text-[11px] text-frost/55">Taxes and shipping calculated at checkout.</p>
               <button
                 disabled={items.length === 0}
                 className="w-full rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-ice-void transition-transform duration-150 ease-out enabled:hover:scale-[1.02] enabled:active:scale-[0.97] disabled:opacity-40"
               >
                 Checkout
               </button>
-              <p className="mt-3 text-center font-mono text-[10px] uppercase tracking-wider text-frost/30">
+              <p className="mt-3 text-center font-mono text-[10px] uppercase tracking-wider text-frost/55">
                 Concept store · checkout not active
               </p>
             </div>
