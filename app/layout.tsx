@@ -56,10 +56,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang={site.locale}>
       <body>
         <MotionProvider>
+          {/* Keyboard users would otherwise tab through seven nav links on every page. */}
+          <a
+            href="#main"
+            className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-palette focus:rounded-full focus:bg-white focus:px-5 focus:py-2.5 focus:text-sm focus:font-semibold focus:text-ice-void"
+          >
+            Skip to content
+          </a>
           <AppChrome />
           <LivingRink />
           <SiteNav />
-          <main className="relative">{children}</main>
+          <main id="main" className="relative">{children}</main>
           <SiteFooter />
         </MotionProvider>
       </body>
