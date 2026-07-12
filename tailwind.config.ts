@@ -28,6 +28,7 @@ const config: Config = {
         announce: "60",
         cursor: "65",
         consent: "70",
+        toast: "75",
         drawer: "85",
         lightbox: "95",
         palette: "100",
