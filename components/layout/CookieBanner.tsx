@@ -20,6 +20,8 @@ export function CookieBanner() {
   function decide(value: "accepted" | "declined") {
     localStorage.setItem(KEY, value);
     setShow(false);
+    // Lets the shortcut hint queue itself behind this banner instead of on top of it.
+    window.dispatchEvent(new Event("leafs:consent"));
   }
 
   return (

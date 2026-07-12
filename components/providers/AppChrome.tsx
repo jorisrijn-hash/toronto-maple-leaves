@@ -5,6 +5,7 @@ import { PageTransition } from "@/components/loader/PageTransition";
 import { AnnouncementBar } from "@/components/layout/AnnouncementBar";
 import { CookieBanner } from "@/components/layout/CookieBanner";
 import { CommandPalette } from "@/components/ui/CommandPalette";
+import { CommandHint } from "@/components/ui/CommandHint";
 
 // Global chrome: announcement bar, entrance loader, page transition, cookie
 // consent and the command palette (Cmd/Ctrl+K).
@@ -18,6 +19,7 @@ export function AppChrome() {
       <PageTransition />
       <CookieBanner />
       <CommandPalette />
+      <CommandHint />
     </>
   );
 }
