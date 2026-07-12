@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { assets } from "@/lib/site";
+import { markIntroDone } from "@/lib/intro";
 
 const SESSION_KEY = "leafs-intro-seen";
 
@@ -26,6 +27,7 @@ export function IntroLoader() {
     }
     if (seen) {
       setPhase("done");
+      markIntroDone(); // the skipped path still has to signal
       return; // never locked scroll, nothing to restore
     }
 
@@ -42,6 +44,7 @@ export function IntroLoader() {
         /* ignore */
       }
       setPhase("done");
+      markIntroDone();
     }, duration);
 
     return () => {

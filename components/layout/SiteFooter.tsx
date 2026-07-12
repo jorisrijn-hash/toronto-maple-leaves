@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { site, assets } from "@/lib/site";
+import { FooterSearch } from "@/components/layout/FooterSearch";
 import { sponsors } from "@/lib/sponsors";
 
 const columns: { title: string; links: { label: string; href: string; external?: boolean }[] }[] = [
@@ -161,10 +162,13 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="mt-10 flex flex-col gap-3 border-t border-white/10 pt-6 text-xs text-frost/60 md:flex-row md:items-center md:justify-between">
-          <p>
-            © {new Date().getFullYear()} {site.name}. Concept redesign.
-          </p>
+        <div className="mt-10 flex flex-col gap-4 border-t border-white/10 pt-6 text-xs text-frost/60 md:flex-row md:items-center md:justify-between">
+          <div className="flex flex-wrap items-center gap-4">
+            <p>
+              © {new Date().getFullYear()} {site.name}. Concept redesign.
+            </p>
+            <FooterSearch />
+          </div>
           <p className="max-w-xl md:text-right">{site.disclaimer}</p>
         </div>
       </div>

@@ -3,12 +3,16 @@
 import { useCallback, useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { EASE_DRAWER } from "@/lib/motion";
+import { whenIntroDone } from "@/lib/intro";
 
-const SEEN_KEY = "leafs-cmdk-hint-v1";
-const CONSENT_KEY = "leafs-cookie-consent-v1";
+const SEEN_KEY = "leafs-cmdk-hint-v2";
+const CONSENT_KEY = "leafs-cookie-consent-v2";
 
-const APPEAR_DELAY = 2500;
-const AUTO_HIDE = 9000;
+// Measured from the moment the page is visible, not from mount. The old 2500ms landed
+// exactly on the intro loader's own 2500ms, so the hint opened underneath it and had
+// marked itself "seen" by the time anyone could look.
+const APPEAR_DELAY = 1200;
+const AUTO_HIDE = 10000;
 
 /**
  * A one time nudge telling people the command palette exists. Rules it follows:
@@ -37,15 +41,19 @@ export function CommandHint() {
 
     let appearTimer: number;
     let hideTimer: number;
+    let stopIntro = () => {};
 
     const queue = () => {
-      appearTimer = window.setTimeout(() => {
-        setShow(true);
-        hideTimer = window.setTimeout(() => dismiss(), AUTO_HIDE);
-      }, APPEAR_DELAY);
+      // Only start counting once the entrance animation is off the screen.
+      stopIntro = whenIntroDone(() => {
+        appearTimer = window.setTimeout(() => {
+          setShow(true);
+          hideTimer = window.setTimeout(() => dismiss(), AUTO_HIDE);
+        }, APPEAR_DELAY);
+      });
     };
 
-    // Wait out the consent banner if it is still on screen.
+    // Wait out the consent banner if it has not been answered yet.
     if (localStorage.getItem(CONSENT_KEY)) queue();
     else window.addEventListener("leafs:consent", queue, { once: true });
 
@@ -62,6 +70,7 @@ export function CommandHint() {
     window.addEventListener("keydown", onKey);
 
     return () => {
+      stopIntro();
       window.clearTimeout(appearTimer);
       window.clearTimeout(hideTimer);
       window.removeEventListener("leafs:consent", queue);

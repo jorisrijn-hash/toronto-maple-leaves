@@ -3,18 +3,30 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
+import { whenIntroDone } from "@/lib/intro";
 
-const KEY = "leafs-cookie-consent-v1";
+// v2: the intro loader used to cover this banner. Bumping the key gives returning
+// visitors, who already answered v1 behind the overlay, a fair chance to see it.
+const KEY = "leafs-cookie-consent-v2";
+const DELAY = 600;
 
 export function CookieBanner() {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
-    const done = localStorage.getItem(KEY);
-    if (!done) {
-      const t = window.setTimeout(() => setShow(true), 900);
-      return () => window.clearTimeout(t);
-    }
+    if (localStorage.getItem(KEY)) return;
+
+    let t: number;
+    // Wait for the page to actually be visible, rather than firing on a timer that
+    // lands while the 2.5s entrance animation is still covering the screen.
+    const stop = whenIntroDone(() => {
+      t = window.setTimeout(() => setShow(true), DELAY);
+    });
+
+    return () => {
+      stop();
+      window.clearTimeout(t);
+    };
   }, []);
 
   function decide(value: "accepted" | "declined") {

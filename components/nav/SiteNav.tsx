@@ -110,19 +110,11 @@ export function SiteNav() {
 
         {/* actions, right */}
         <div className="col-start-3 flex shrink-0 items-center justify-end gap-2 justify-self-end">
-          <button
-            type="button"
-            onClick={openPalette}
-            aria-label="Search the site"
-            className="group hidden items-center gap-2 rounded-full border border-white/12 bg-white/[0.03] py-2 pl-3 pr-2 text-sm text-frost/60 outline-none transition-colors hover:border-white/30 hover:text-white focus-visible:ring-2 focus-visible:ring-ice-blue md:flex"
-          >
-            <SearchIcon className="h-4 w-4" />
-            <span className="hidden xl:inline">Search</span>
-            <kbd className="rounded border border-white/15 bg-white/[0.04] px-1.5 py-0.5 font-mono text-[10px] text-frost/55 transition-colors group-hover:text-frost/80">
-              {modKey}K
-            </kbd>
-          </button>
-
+          {/*
+            The search pill used to live here. It is gone by design: the shortcut is
+            taught by the one time hint, the mobile menu, and the footer. Put it back by
+            restoring a button that calls openPalette().
+          */}
           <Link
             href="/tickets"
             className="group inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-semibold text-ice-void shadow-glow transition-transform duration-150 ease-out hover:scale-[1.03] active:scale-[0.97]"
@@ -164,7 +156,10 @@ export function SiteNav() {
                   className="mb-1 flex w-full items-center gap-3 rounded-md px-2 py-3 text-base font-medium text-frost/80 transition-colors hover:text-white"
                 >
                   <SearchIcon className="h-4 w-4" />
-                  Search players, pages, products
+                  <span className="flex-1 text-left">Search players, pages, products</span>
+                  <kbd className="hidden rounded border border-white/15 bg-white/[0.04] px-1.5 py-0.5 font-mono text-[10px] text-frost/60 md:inline">
+                    {modKey}K
+                  </kbd>
                 </button>
               </li>
               {nav.map((item) => (
